@@ -35,8 +35,10 @@ component art::Vector3::z() const
 /**
  * @brief Get red intensity.
  */
-component art::Vector3::r() const {
-    return m_components[RGB::RED]}
+component art::Vector3::r() const
+{
+    return m_components[RGB::RED];
+}
 /**
  * @brief Get green intensity.
  */
@@ -84,7 +86,8 @@ art::Vector3 &art::Vector3::operator+=(const Vector3 &v2)
  * @brief Override operator for subtraction with another
  * vector.
  */
-art::Vector3 & art::Vector3::operator-=(const Vector3 &v2){
+art::Vector3 &art::Vector3::operator-=(const Vector3 &v2)
+{
     m_components[0] -= v2[0];
     m_components[1] -= v2[1];
     m_components[2] -= v2[2];
@@ -96,7 +99,8 @@ art::Vector3 & art::Vector3::operator-=(const Vector3 &v2){
  * @brief Override operator for multiplication with another
  * vector. 
  */
-art::Vector3 &art::Vector3::operator*=(const Vector3 &v2){
+art::Vector3 &art::Vector3::operator*=(const Vector3 &v2)
+{
     m_components[0] *= v2[0];
     m_components[1] *= v2[1];
     m_components[2] *= v2[2];
@@ -108,7 +112,8 @@ art::Vector3 &art::Vector3::operator*=(const Vector3 &v2){
  * @brief Override operator for division by another
  * vector.
  */
-art::Vector3 &art::Vector3::operator/=(const Vector3 &v2){
+art::Vector3 &art::Vector3::operator/=(const Vector3 &v2)
+{
     m_components[0] /= v2[0];
     m_components[1] /= v2[1];
     m_components[2] /= v2[2];
@@ -119,7 +124,8 @@ art::Vector3 &art::Vector3::operator/=(const Vector3 &v2){
 /**
  * @brief Override operator for multiplication with component.
  */
-art::Vector3 &art::Vector3::operator*=(const component t){
+art::Vector3 &art::Vector3::operator*=(const component t)
+{
     m_components[0] *= t;
     m_components[1] *= t;
     m_components[2] *= t;
@@ -130,7 +136,8 @@ art::Vector3 &art::Vector3::operator*=(const component t){
 /**
  * @brief Override operator for division by component.
  */
-art::Vector3 &art::Vector3::operator/=(const component t){
+art::Vector3 &art::Vector3::operator/=(const component t)
+{
     m_components[0] /= t;
     m_components[1] /= t;
     m_components[2] /= t;
@@ -141,7 +148,8 @@ art::Vector3 &art::Vector3::operator/=(const component t){
 /**
  * @brief Access element.
  */
-component art::Vector3::operator[](int i) const{
+component art::Vector3::operator[](int i) const
+{
     return m_components[i];
 }
 
@@ -156,64 +164,73 @@ component &art::Vector3::operator[](int i)
 /**
  * @brief Override operator for sum between vectors.
  */
-art::Vector3 operator+(const art::Vector3 &v1, const art::Vector3 &v2) {
+art::Vector3 operator+(const art::Vector3 &v1, const art::Vector3 &v2)
+{
     return art::Vector3(v1[0] + v2[0], v1[1] + v2[1], v1[2] + v2[2]);
 }
 
 /**
  * @brief Override operator for difference between vectors.
  */
-art::Vector3 operator-(const art::Vector3 &v1, const art::Vector3 &v2) {
+art::Vector3 operator-(const art::Vector3 &v1, const art::Vector3 &v2)
+{
     return art::Vector3(v1[0] - v2[0], v1[1] - v2[1], v1[2] - v2[2]);
 }
 
 /**
  * @brief Override operator for multiplication between vectors.
  */
-art::Vector3 operator*(const art::Vector3 &v1, const art::Vector3 &v2) {
+art::Vector3 operator*(const art::Vector3 &v1, const art::Vector3 &v2)
+{
     return art::Vector3(v1[0] * v2[0], v1[1] * v2[1], v1[2] * v2[2]);
 }
 
 /**
  * @brief Override operator for division between vectors.
  */
-art::Vector3 operator/(const art::Vector3 &v1, const art::Vector3 &v2) {
+art::Vector3 operator/(const art::Vector3 &v1, const art::Vector3 &v2)
+{
     return art::Vector3(v1[0] / v2[0], v1[1] / v2[1], v1[2] / v2[2]);
 }
 
 /**
  * @brief Override operator for multiplication between component and vector.
  */
-art::Vector3 operator*(component t, const art::Vector3 &v) {
-    return art::Vector3(t*v[0], t*v[1], t*v[2]);
+art::Vector3 operator*(component t, const art::Vector3 &v)
+{
+    return art::Vector3(t * v[0], t * v[1], t * v[2]);
 }
 
 /**
  * @brief Override operator for division between vector and scalar.
  */
-art::Vector3 operator/(art::Vector3 v, component t) {
-    return art::Vector3(v[0]/t, v[1]/t, v[2]/t);
+art::Vector3 operator/(art::Vector3 v, component t)
+{
+    return art::Vector3(v[0] / t, v[1] / t, v[2] / t);
 }
 
 /**
  * @brief Override operator for multiplication between vector and scalar.
  */
-art::Vector3 operator*(const art::Vector3 &v, component t) {
-    return art::Vector3(t*v[0], t*v[1], t*v[2]);
+art::Vector3 operator*(const art::Vector3 &v, component t)
+{
+    return art::Vector3(t * v[0], t * v[1], t * v[2]);
 }
 
 /**
  * @brief Override operator for dot product between vectors.
  */
-component dot(const art::Vector3 &v1, const art::Vector3 &v2) {
-    return v1[0] *v2[0] + v1[1] *v2[1]  + v1[2] *v2[2];
+component dot(const art::Vector3 &v1, const art::Vector3 &v2)
+{
+    return v1[0] * v2[0] + v1[1] * v2[1] + v1[2] * v2[2];
 }
 
 /**
  * @brief Override operator for product between vectors.
  */
-art::Vector3 cross(const art::Vector3 &v1, const art::Vector3 &v2) {
-    return art::Vector3( (v1[1]*v2[2] - v1[2]*v2[1]),
-                (-(v1[0]*v2[2] - v1[2]*v2[0])),
-                (v1[0]*v2[1] - v1[1]*v2[0]));
+art::Vector3 cross(const art::Vector3 &v1, const art::Vector3 &v2)
+{
+    return art::Vector3((v1[1] * v2[2] - v1[2] * v2[1]),
+                        (-(v1[0] * v2[2] - v1[2] * v2[0])),
+                        (v1[0] * v2[1] - v1[1] * v2[0]));
 }
