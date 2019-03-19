@@ -1,6 +1,7 @@
 #ifndef _common_h_
 #define _common_h_
 
+typedef float component;
 typedef long coord_type;
 
 /// Enum for easily access the coordinates positions.

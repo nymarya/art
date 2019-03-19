@@ -1,6 +1,6 @@
 #include "color.h"
 
-rstzr::Color::Color (color_t red, color_t green, color_t blue)
+art::Color::Color (color_t red, color_t green, color_t blue)
 {
 	m_channels = new color_t[3];
 	m_channels[0] = red;
@@ -8,7 +8,15 @@ rstzr::Color::Color (color_t red, color_t green, color_t blue)
 	m_channels[2] = blue;
 }
 
-rstzr::Color& rstzr::Color::Color::operator=( const Color& other ){
+art::Color::Color(float red, float green, float blue)
+{
+	m_channels = new color_t[3];
+	m_channels[0] = 255 * red;
+	m_channels[1] = 255 * green;
+	m_channels[2] = 255 * blue;
+}
+
+art::Color& art::Color::Color::operator=( const Color& other ){
 	if (this == &other) return *this;
 
 	delete [] m_channels; //<! Deallocate old storage area.
@@ -26,18 +34,18 @@ rstzr::Color& rstzr::Color::Color::operator=( const Color& other ){
 /**
  * @brief Override operator 'equal'
  */
-bool rstzr::Color::operator==(const Color &other) const{
+bool art::Color::operator==(const Color &other) const{
 	return ( other.red() == this->red() ) && ( other.green() == this->green() ) && ( other.blue() == this->blue() );
 }
 
-color_t rstzr::Color::red() const{
+color_t art::Color::red() const{
     return m_channels[0];
 }
 
-color_t rstzr::Color::green() const{
+color_t art::Color::green() const{
     return m_channels[1];
 }
 
-color_t rstzr::Color::blue() const{
+color_t art::Color::blue() const{
     return m_channels[2];
 }

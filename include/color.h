@@ -16,9 +16,9 @@ public:
   Color(color_t red, color_t green, color_t blue);
 
   /**
-   * TODO: Construtor receives the percentage of that color
-   * Color( float red, float green, float blue);
+   * @brief Construtor receives the percentage of that color.
    */
+  Color( float red, float green, float blue);
 
   ~Color() = default;
 

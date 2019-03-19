@@ -6,7 +6,7 @@
  * @param y Y coordinate.
  */
 art::Point3D::Point3D(coord_type x, coord_type y, coord_type z)
-	: m_x(x), m_y(y), m_z(z)
+    : m_x(x), m_y(y), m_z(z)
 { /*empty*/
 }
 
@@ -15,7 +15,7 @@ art::Point3D::Point3D(coord_type x, coord_type y, coord_type z)
  */
 coord_type art::Point3D::x() const
 {
-	return m_x;
+    return m_x;
 }
 
 /**
@@ -23,7 +23,7 @@ coord_type art::Point3D::x() const
  */
 coord_type art::Point3D::y() const
 {
-	return m_y;
+    return m_y;
 }
 
 /**
@@ -31,5 +31,5 @@ coord_type art::Point3D::y() const
  */
 coord_type art::Point3D::z() const
 {
-	return m_z;
+    return m_z;
 }

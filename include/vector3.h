@@ -3,8 +3,6 @@
 
 #include "common.h"
 
-typedef float component;
-
 namespace art{
 
     /// Class representing a tridimensional vector
@@ -13,7 +11,7 @@ namespace art{
         public:
             Vector3(component component1, component component2, component component3);
             ~Vector3() = default;
-
+            
             /////////////////
             /// Accessors ///
             /////////////////  

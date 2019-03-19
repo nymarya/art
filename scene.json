@@ -1,0 +1,13 @@
+{
+    "scene":{
+        "camera":{
+            "width": 1000,
+            "height": 1000
+        },
+        "background":{
+            "type": "",
+            "colors": [ [0, 255, 255]]
+        },
+        "filename":"teste"
+    }
+}
