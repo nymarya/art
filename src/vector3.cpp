@@ -152,3 +152,68 @@ component &art::Vector3::operator[](int i)
 {
     return m_components[i];
 }
+
+/**
+ * @brief Override operator for sum between vectors.
+ */
+art::Vector3 operator+(const art::Vector3 &v1, const art::Vector3 &v2) {
+    return art::Vector3(v1[0] + v2[0], v1[1] + v2[1], v1[2] + v2[2]);
+}
+
+/**
+ * @brief Override operator for difference between vectors.
+ */
+art::Vector3 operator-(const art::Vector3 &v1, const art::Vector3 &v2) {
+    return art::Vector3(v1[0] - v2[0], v1[1] - v2[1], v1[2] - v2[2]);
+}
+
+/**
+ * @brief Override operator for multiplication between vectors.
+ */
+art::Vector3 operator*(const art::Vector3 &v1, const art::Vector3 &v2) {
+    return art::Vector3(v1[0] * v2[0], v1[1] * v2[1], v1[2] * v2[2]);
+}
+
+/**
+ * @brief Override operator for division between vectors.
+ */
+art::Vector3 operator/(const art::Vector3 &v1, const art::Vector3 &v2) {
+    return art::Vector3(v1[0] / v2[0], v1[1] / v2[1], v1[2] / v2[2]);
+}
+
+/**
+ * @brief Override operator for multiplication between component and vector.
+ */
+art::Vector3 operator*(component t, const art::Vector3 &v) {
+    return art::Vector3(t*v[0], t*v[1], t*v[2]);
+}
+
+/**
+ * @brief Override operator for division between vector and scalar.
+ */
+art::Vector3 operator/(art::Vector3 v, component t) {
+    return art::Vector3(v[0]/t, v[1]/t, v[2]/t);
+}
+
+/**
+ * @brief Override operator for multiplication between vector and scalar.
+ */
+art::Vector3 operator*(const art::Vector3 &v, component t) {
+    return art::Vector3(t*v[0], t*v[1], t*v[2]);
+}
+
+/**
+ * @brief Override operator for dot product between vectors.
+ */
+component dot(const art::Vector3 &v1, const art::Vector3 &v2) {
+    return v1[0] *v2[0] + v1[1] *v2[1]  + v1[2] *v2[2];
+}
+
+/**
+ * @brief Override operator for product between vectors.
+ */
+art::Vector3 cross(const art::Vector3 &v1, const art::Vector3 &v2) {
+    return art::Vector3( (v1[1]*v2[2] - v1[2]*v2[1]),
+                (-(v1[0]*v2[2] - v1[2]*v2[0])),
+                (v1[0]*v2[1] - v1[1]*v2[0]));
+}
