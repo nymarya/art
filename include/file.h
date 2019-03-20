@@ -29,12 +29,14 @@ public:
   /**
    * @brief Read json and save figures to canvas
    */
-  void read();
+  std::unique_ptr<Background> read();
 
   void save_ppm(const Background &b);
 
 private:
   std::string m_filename;
+
+  std::unique_ptr<Background>  create_background(json &j, size_t w, size_t h);
 
 };
 } // namespace rstzr

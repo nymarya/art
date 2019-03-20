@@ -8,7 +8,7 @@ art::File::File(std::string filename)
 /**
  * @brief Read json and save figures to canvas
  */
-void art::File::read()
+std::unique_ptr<art::Background> art::File::read()
 {
 	// read a JSON file
 	std::ifstream input(m_filename);
@@ -17,25 +17,24 @@ void art::File::read()
 
 	// Get scene
 	auto scene = j.at("scene");
+	std::cout << "scene\n";
 
 	//Get canvas' data
 	auto h = scene.at("camera").at("height");
 	auto w = scene.at("camera").at("width");
-	Canvas copy(w, h);
-	c = copy;
+	std::cout << "cam\n";
 
 	m_filename = scene.at("filename");
 
-
-
+	return create_background(scene.at("background"), w, h);
 }
 
-void  art::File::save_ppm(const rstzr::Canvas &canvas)
+void art::File::save_ppm(const art::Background &b)
 {
 
-	component_t *image = canvas.pixels();
-	size_t width = canvas.width();
-	size_t height = canvas.height();
+	component *image = b.pixels();
+	size_t width = b.width();
+	size_t height = b.height();
 
 	std::ofstream file;
 
@@ -68,20 +67,26 @@ void  art::File::save_ppm(const rstzr::Canvas &canvas)
 /**
  * @brief Instantiate object
  */
-void create_background(json &j)
+std::unique_ptr<art::Background> art::File::create_background(json &j, size_t w, size_t h)
 {
 
 	std::string name = j.at("type");
+	std::cout << "type\n";
 
 	if (name == "solid")
 	{
-		std::string color = j.at('color');
-		return art::Background( art::Color(color));
+		std::vector<color_t> color = j.at("color");
+		art::Color c = art::Color(color[0], color[1], color[2]);
+		return std::make_unique<art::Background>(c, w, h);
 	}
 	else if (name == "gradient")
 	{
-		std::string color = j.at('colors');
-		return art::Background( Color(color[0]), Color(color[1]), Color(color[2]), Color(color[3]));
+		std::vector<color_t> color = j.at("colors");
+		art::Color c1 = art::Color(color[0], color[1], color[2]);
+		art::Color c2 = art::Color(color[0], color[1], color[2]);
+		art::Color c3 = art::Color(color[0], color[1], color[2]);
+		art::Color c4 = art::Color(color[0], color[1], color[2]);
+		return std::make_unique<art::Background>(c1, c2, c3, c4, w, h);
 	}
 	else
 	{
