@@ -2,6 +2,7 @@
 #define _background_h_
 
 #include<memory> //unique_ptr
+#include <stdlib.h> // srand, rand 
 
 #include "common.h"
 #include "color.h"
@@ -30,6 +31,12 @@ namespace art{
             size_t height() const;
 
             void pixel( size_t x, size_t y, Color &c);
+            /**
+             * @brief Get the pixel color from background.
+             */
+            Color color(const long x, const long y) const;
+
+            void bilinear( Color &c1, Color &c2, Color &c3, Color &c4, size_t nx, size_t ny );
 
         private:
             /* data */
