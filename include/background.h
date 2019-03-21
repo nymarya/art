@@ -3,6 +3,7 @@
 
 #include<memory> //unique_ptr
 #include <stdlib.h> // srand, rand 
+#include <cmath>
 
 #include "common.h"
 #include "color.h"
@@ -36,7 +37,7 @@ namespace art{
              */
             Color color(const long x, const long y) const;
 
-            void bilinear( Color &c1, Color &c2, Color &c3, Color &c4, size_t nx, size_t ny );
+            void bilinear( Color &c1, Color &c2, Color &c3, Color &c4);
 
         private:
             /* data */
