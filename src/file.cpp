@@ -89,11 +89,11 @@ std::unique_ptr<art::Background> art::File::create_background(json &j)
 	}
 	else if (name == "gradient")
 	{
-		std::vector<color_t> color = scene.at("colors");
-		art::Color c1 = art::Color(color[0], color[1], color[2]);
-		art::Color c2 = art::Color(color[0], color[1], color[2]);
-		art::Color c3 = art::Color(color[0], color[1], color[2]);
-		art::Color c4 = art::Color(color[0], color[1], color[2]);
+		std::vector<std::vector<color_t>> color = scene.at("colors");
+		art::Color c1 = art::Color(color[0][0], color[0][1], color[0][2]);
+		art::Color c2 = art::Color(color[1][0], color[1][1], color[1][2]);
+		art::Color c3 = art::Color(color[2][0], color[2][1], color[2][2]);
+		art::Color c4 = art::Color(color[3][0], color[3][1], color[3][2]);
 		return std::make_unique<art::Background>(c1, c2, c3, c4, name);
 	}
 	else

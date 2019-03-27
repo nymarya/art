@@ -5,9 +5,14 @@
             "height": 1000
         },
         "background":{
-            "type": "solid",
-            "color":[0, 255, 255]
-        },
-        "filename":"teste"
+            "type": "gradient",
+            "colors":[
+                [0, 0, 51],
+                [0, 255, 51],
+                [255,255,51],
+                [255, 0, 51]
+            ]
+            },
+        "filename":"teste_grad"
     }
 }
