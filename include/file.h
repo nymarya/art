@@ -5,8 +5,9 @@
 #include <fstream>
 #include <memory> //unique_ptr, make_unique
 
-#include "background.h"
 #include "color.h"
+#include "canvas.h"
+#include "background.h"
 
 #include "common.h"
 
@@ -27,16 +28,21 @@ public:
   ~File() = default;
 
   /**
-   * @brief Read json and save figures to canvas
+   * @brief Read json and return it
    */
-  std::unique_ptr<Background> read();
+  json read();
 
-  void save_ppm(const Background &b);
+  /**
+   * @brief Create a canvas object based on the json read.
+   */
+  std::unique_ptr<Canvas> create_canvas(json &j);
+
+  std::unique_ptr<Background>  create_background(json &j);
+
+  void save_ppm(const Canvas &b);
 
 private:
   std::string m_filename;
-
-  std::unique_ptr<Background>  create_background(json &j, size_t w, size_t h);
 
 };
 } // namespace rstzr

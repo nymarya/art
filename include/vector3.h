@@ -1,7 +1,9 @@
 #ifndef _vector3_h_
-#define _vector_h_
+#define _vector3_h_
 
 #include "common.h"
+
+using component_t = float;
 
 namespace art{
 
@@ -9,7 +11,7 @@ namespace art{
     class Vector3
     {
         public:
-            Vector3(component component1, component component2, component component3);
+            Vector3(component_t component_t1, component_t component_t2, component_t component_t3);
             ~Vector3() = default;
             
             /////////////////
@@ -19,27 +21,27 @@ namespace art{
             /**
              * @brief Get x coordinate.
              */
-            component x() const;
+            component_t x() const;
             /**
              * @brief Get y coordinate.
              */
-            component y() const;
+            component_t y() const;
             /**
              * @brief Get z coordinate.
              */
-            component z() const;
+            component_t z() const;
             /**
              * @brief Get red intensity.
              */
-            component r() const;
+            component_t r() const;
             /**
              * @brief Get green intensity.
              */
-            component g() const;
+            component_t g() const;
             /**
              * @brief Get blue intensity.
              */
-            component b() const;    
+            component_t b() const;    
 
             /////////////////
             /// Operators ///
@@ -80,28 +82,28 @@ namespace art{
             Vector3& operator/=(const Vector3 &v2);
 
             /**
-             * @brief Override operator for multiplication with component.
+             * @brief Override operator for multiplication with component_t.
              */
-            Vector3& operator*=(const component t);
+            Vector3& operator*=(const component_t t);
 
             /**
-             * @brief Override operator for division by component.
+             * @brief Override operator for division by component_t.
              */
-            Vector3& operator/=(const component t);
+            Vector3& operator/=(const component_t t);
 
             /**
              * @brief Access element.
              */
-            component operator[](int i) const;
+            component_t operator[](int i) const;
 
             /**
              * @brief Access element and return reference to it.
              */
-            component& operator[](int i);
+            component_t& operator[](int i);
 
         private:
             /// Content
-            component m_components[3];
+            component_t m_components[3];
             
     };
 

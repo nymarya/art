@@ -8,12 +8,23 @@ art::File::File(std::string filename)
 /**
  * @brief Read json and save figures to canvas
  */
-std::unique_ptr<art::Background> art::File::read()
+json art::File::read()
 {
 	// read a JSON file
 	std::ifstream input(m_filename);
 	json j;
 	input >> j;
+
+	m_filename = j.at("scene").at("filename");
+
+	return j;
+}
+
+/**
+ * @brief Read json and save figures to canvas
+ */
+std::unique_ptr<art::Canvas> art::File::create_canvas(json &j)
+{
 
 	// Get scene
 	auto scene = j.at("scene");
@@ -22,19 +33,16 @@ std::unique_ptr<art::Background> art::File::read()
 	//Get canvas' data
 	auto h = scene.at("camera").at("height");
 	auto w = scene.at("camera").at("width");
-	std::cout << "cam\n";
 
-	m_filename = scene.at("filename");
-
-	return create_background(scene.at("background"), w, h);
+	return std::make_unique<Canvas>(w, h);
 }
 
-void art::File::save_ppm(const art::Background &b)
+void art::File::save_ppm(const art::Canvas &c)
 {
 
-	component *image = b.pixels();
-	size_t width = b.width();
-	size_t height = b.height();
+	element_t *image = c.pixels();
+	size_t width = c.width();
+	size_t height = c.height();
 
 	std::ofstream file;
 
@@ -67,26 +75,26 @@ void art::File::save_ppm(const art::Background &b)
 /**
  * @brief Instantiate object
  */
-std::unique_ptr<art::Background> art::File::create_background(json &j, size_t w, size_t h)
+std::unique_ptr<art::Background> art::File::create_background(json &j)
 {
-
-	std::string name = j.at("type");
+	auto scene = j.at("scene").at("background");
+	std::string name = scene.at("type");
 	std::cout << "type\n";
 
 	if (name == "solid")
 	{
-		std::vector<color_t> color = j.at("color");
+		std::vector<color_t> color = scene.at("color");
 		art::Color c = art::Color(color[0], color[1], color[2]);
-		return std::make_unique<art::Background>(c, w, h);
+		return std::make_unique<art::Background>(c, name);
 	}
 	else if (name == "gradient")
 	{
-		std::vector<color_t> color = j.at("colors");
+		std::vector<color_t> color = scene.at("colors");
 		art::Color c1 = art::Color(color[0], color[1], color[2]);
 		art::Color c2 = art::Color(color[0], color[1], color[2]);
 		art::Color c3 = art::Color(color[0], color[1], color[2]);
 		art::Color c4 = art::Color(color[0], color[1], color[2]);
-		return std::make_unique<art::Background>(c1, c2, c3, c4, w, h);
+		return std::make_unique<art::Background>(c1, c2, c3, c4, name);
 	}
 	else
 	{
