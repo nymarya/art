@@ -1,5 +1,6 @@
 #include "../include/file.h"
 #include <typeinfo>
+#include <dirent.h>
 
 art::File::File(std::string filename)
 	: m_filename(filename)
@@ -15,7 +16,34 @@ json art::File::read()
 	json j;
 	input >> j;
 
-	m_filename = j.at("scene").at("filename");
+	try{
+		m_filename = j.at("scene").at("filename");
+	} catch (json::exception e){
+		
+		//if no filename if informed, use
+		// the name of the file describing the scene
+		m_filename = m_filename.substr(0, m_filename.find(".json"));
+
+		// @see https://stackoverflow.com/questions/612097/how-can-i-get-the-list-of-files-in-a-directory-using-c-or-c
+		DIR *dir;
+		struct dirent *ent;
+		if ((dir = opendir ("./gallery")) != NULL) {
+			int file = 0;
+			while ((ent = readdir (dir)) != NULL) {
+				// count how many files with that name exists
+				std::string name =  ent->d_name;
+				bool exists_one = name.substr(0, name.find(".")) == m_filename;
+				bool exists_more = name.substr(0, name.find_last_of("_")) == m_filename;
+				if( exists_one || exists_more)
+					file++;
+			}
+			if(file > 0)
+				m_filename += "_" + std::to_string(file);
+			closedir (dir);
+		} else {
+		 /* could not open directory */
+		}
+	}
 
 	return j;
 }
@@ -28,7 +56,6 @@ std::unique_ptr<art::Canvas> art::File::create_canvas(json &j)
 
 	// Get scene
 	auto scene = j.at("scene");
-	std::cout << "scene\n";
 
 	//Get canvas' data
 	auto h = scene.at("camera").at("height");
@@ -80,7 +107,6 @@ std::unique_ptr<art::Background> art::File::create_background(json &j)
 {
 	auto scene = j.at("scene").at("background");
 	std::string name = scene.at("type");
-	std::cout << "type\n";
 
 	if (name == "solid")
 	{
@@ -101,6 +127,4 @@ std::unique_ptr<art::Background> art::File::create_background(json &j)
 	{
 		throw std::invalid_argument("Invalid syntax. Type not found: " + name);
 	}
-
-	//If fill=None, set the method
 }
