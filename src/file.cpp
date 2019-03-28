@@ -56,9 +56,9 @@ void art::File::save_ppm(const art::Canvas &c)
 		 << height << "\n";
 	file << 255 << "\n";
 	
-	for (size_t y = 0; y < height; ++y)
+	for (size_t y = height-1; y > 0 ; --y)
 	{
-		for ( size_t x = 0; x < width; ++x)
+		for ( size_t x = 0; x < width; x++)
 		{
 			for (size_t z = 0u; z < 3u; z++)
 			{
