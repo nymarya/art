@@ -69,7 +69,6 @@ void art::File::save_ppm(const art::Canvas &c)
 		}
 		file << "\n";
 	}
-	std::cout << "fi\n";
 
 	file.close();
 }

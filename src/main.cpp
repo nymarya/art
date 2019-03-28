@@ -28,7 +28,6 @@ int main()
                // Not shooting rays just yet; so let us sample the background.
                auto color = background->color(float(i) / float(w), float(j) / float(h)); // get background color.
                c->pixel(i, j, color);                                          // set image buffer at position (i,j), accordingly.
-               std::cout << "i :" << i << "j: " << j <<"\n";
           }
      }
 
