@@ -3,7 +3,7 @@
 #include <dirent.h>
 
 art::File::File(std::string filename)
-	: m_filename(filename)
+	: m_filename(filename), m_overwrite(false)
 { /*empty*/
 }
 /**
@@ -23,26 +23,12 @@ json art::File::read()
 		//if no filename if informed, use
 		// the name of the file describing the scene
 		m_filename = m_filename.substr(0, m_filename.find(".json"));
+	}
 
-		// @see https://stackoverflow.com/questions/612097/how-can-i-get-the-list-of-files-in-a-directory-using-c-or-c
-		DIR *dir;
-		struct dirent *ent;
-		if ((dir = opendir ("./gallery")) != NULL) {
-			int file = 0;
-			while ((ent = readdir (dir)) != NULL) {
-				// count how many files with that name exists
-				std::string name =  ent->d_name;
-				bool exists_one = name.substr(0, name.find(".")) == m_filename;
-				bool exists_more = name.substr(0, name.find_last_of("_")) == m_filename;
-				if( exists_one || exists_more)
-					file++;
-			}
-			if(file > 0)
-				m_filename += "_" + std::to_string(file);
-			closedir (dir);
-		} else {
-		 /* could not open directory */
-		}
+	try{
+		m_overwrite = j.at("scene").at("overwrite_file");
+	} catch (json::exception e){
+		//does nothing
 	}
 
 	return j;
@@ -75,7 +61,7 @@ void art::File::save_ppm(const art::Canvas &c)
 
 	std::string folder = "gallery/";
 	std::string extension = ".ppm";
-	std::string path = folder + this->m_filename + extension;
+	std::string path = folder + this->new_name() + extension;
 	file.open(path);
 	file << "P3"
 		 << "\n";
@@ -127,4 +113,34 @@ std::unique_ptr<art::Background> art::File::create_background(json &j)
 	{
 		throw std::invalid_argument("Invalid syntax. Type not found: " + name);
 	}
+}
+
+/**
+* @brief Get filenama to new image*
+*/
+std::string art::File::new_name()
+{
+	if( m_overwrite ){
+		//Rename file if necessary
+		// @see https://stackoverflow.com/questions/612097/how-can-i-get-the-list-of-files-in-a-directory-using-c-or-c
+		DIR *dir;
+		struct dirent *ent;
+		if ((dir = opendir ("./gallery")) != NULL) {
+			int file = 0;
+			while ((ent = readdir (dir)) != NULL) {
+				// count how many files with that name exists
+				std::string name =  ent->d_name;
+				bool exists_one = name.substr(0, name.find(".")) == m_filename;
+				bool exists_more = name.substr(0, name.find_last_of("_")) == m_filename;
+				if( exists_one || exists_more)
+					file++;
+			}
+			return m_filename + "_" + std::to_string(file);
+			closedir (dir);
+		} else {
+			/* could not open directory */
+
+		}
+	}
+	return m_filename;
 }

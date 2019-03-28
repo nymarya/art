@@ -41,8 +41,15 @@ public:
 
   void save_ppm(const Canvas &b);
 
+  /**
+   * @brief Get filename to new image*
+   */
+  std::string new_name();
+
+
 private:
   std::string m_filename;
+  bool m_overwrite; //flag indicating if new image overwrite the old one
 
 };
 } // namespace rstzr
