@@ -55,19 +55,21 @@ void art::File::save_ppm(const art::Canvas &c)
 	file << width << " "
 		 << height << "\n";
 	file << 255 << "\n";
-
-	for (unsigned int x = 0; x < width; x++)
+	
+	for (size_t y = 0; y < height; ++y)
 	{
-		for (unsigned int y = 0; y < height; y++)
+		for ( size_t x = 0; x < width; ++x)
 		{
-			for (int z = 0; z < 3; z++)
+			for (size_t z = 0u; z < 3u; z++)
 			{
-				auto index = height * width * z + width * y + x;
+				//y * width + x + width * height * 2
+				auto index = y * width + x + width * height * z;
 				file << static_cast<unsigned>(image[index]) << " ";
 			}
 		}
 		file << "\n";
 	}
+	std::cout << "fi\n";
 
 	file.close();
 }

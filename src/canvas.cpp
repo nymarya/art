@@ -11,11 +11,11 @@ art::Canvas::Canvas(const size_t width, const size_t height)
       m_fill_color(Color((color_t)255, (color_t)0, (color_t)0))
 {
 
-    for (unsigned int x = 0; x < m_width; x++)
+    for (unsigned int x = m_height-1; x >0; x--)
     {
-        for (unsigned int y = 0; y < m_height; y++)
+        for (unsigned int y = 0; y < m_width; y++)
         {
-            pixel(x, y, m_bkg_color);
+            pixel(y, x, m_bkg_color);
         }
     }
 }
@@ -49,9 +49,10 @@ art::Canvas &art::Canvas::operator=(Canvas &other)
 void art::Canvas::pixel(const long x, const long y, const Color &c)
 {
     // m_pixels[(x*m_width)+y] = c;
-    m_pixels[m_width * y + x] = c.red();
-    m_pixels[m_height * m_width + m_width * y + x] = c.green();
-    m_pixels[m_height * m_width * 2 + m_width * y + x] = c.blue();
+    //x*(m_height*m_width) + y*m_height + z
+    m_pixels[ y * m_width + x ] = c.red();
+    m_pixels[y * m_width + x + m_width * m_height ] = c.green();
+    m_pixels[y * m_width + x + m_width * m_height * 2] = c.blue();
 }
 
 /**
@@ -60,10 +61,14 @@ void art::Canvas::pixel(const long x, const long y, const Color &c)
 //TODO: change x and y to Point2D
 void art::Canvas::pixel(const long x, const long y, const art::Vector3 &v)
 {
+    if(x < 0 || x >= m_width || y < 0 || y >= m_height )
+		return;
     // m_pixels[(x*m_width)+y] = c;
-    m_pixels[m_width * y + x] = v[RGB::RED] * 255;
-    m_pixels[m_height * m_width + m_width * y + x] = v[RGB::GREEN] * 255;
-    m_pixels[m_height * m_width * 2 + m_width * y + x] = v[RGB::BLUE] * 255;
+    //(3 * z + y) * m_width + x
+    //y * m_width + x + m_width * m_height * 2
+    m_pixels[y * m_width + x  ] = v[RGB::RED] * 255;
+    m_pixels[y * m_width + x + m_width * m_height ] = v[RGB::GREEN] * 255;
+    m_pixels[y * m_width + x + m_width * m_height * 2] = v[RGB::BLUE] * 255;
 }
 
 /**
@@ -71,7 +76,7 @@ void art::Canvas::pixel(const long x, const long y, const art::Vector3 &v)
  */
 element_t  art::Canvas::pixel(const long x, const long y) const
 {
-    return m_pixels[(x * m_width) + y];
+    return m_pixels[x*(m_height*m_width) + y*m_width ];
 }
 
 /**
@@ -79,9 +84,9 @@ element_t  art::Canvas::pixel(const long x, const long y) const
  */
 art::Color art::Canvas::color(const long x, const long y) const
 {
-    auto red = m_pixels[m_width * y + x];
-    auto green = m_pixels[m_height * m_width + m_width * y + x];
-    auto blue = m_pixels[m_height * m_width * 2 + m_width * y + x];
+    auto red = m_pixels[y * m_width + x ];
+    auto green = m_pixels[y * m_width + x + m_width * m_height ];
+    auto blue = m_pixels[y * m_width + x + m_width * m_height * 2];
 
     return Color(red, green, blue);
 }
