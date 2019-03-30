@@ -3,8 +3,10 @@
 #include <dirent.h>
 
 art::File::File(std::string filename)
-	: m_filename(filename), m_overwrite(false)
-{ /*empty*/
+	: m_filename(filename), m_overwrite(false),
+	m_extension(".ppm")
+{ 
+  /*empty*/
 }
 /**
  * @brief Read json and save figures to canvas
@@ -56,6 +58,15 @@ std::unique_ptr<art::Buffer> art::File::create_canvas(json &j)
 	return std::make_unique<Buffer>(w, h);
 }
 
+/**
+ * @brief Save image to file
+ */
+void art::File::save(const Buffer &b){
+	file_methot_t save_method = funcMap[m_extension];
+	(this->*save_method)(b);
+}
+
+
 void art::File::save_ppm(const art::Buffer &c)
 {
 
@@ -90,6 +101,21 @@ void art::File::save_ppm(const art::Buffer &c)
 	}
 
 	file.close();
+}
+
+/**
+ * @brief Save image to .png file.
+ */
+void art::File::save_png(const art::Buffer &b){
+	std::string folder = "gallery/";
+	std::string extension = ".png";
+	std::string path = folder + this->new_name() + extension;
+
+	int w = b.width();
+	int h = b.height();
+
+	//stbi_write_png(path, w, h, int comp, const void *data, int stride_in_bytes);
+
 }
 
 /**
