@@ -16,18 +16,24 @@ json art::File::read()
 	json j;
 	input >> j;
 
-	try{
+	try
+	{
 		m_filename = j.at("scene").at("filename");
-	} catch (json::exception e){
-		
+	}
+	catch (json::exception e)
+	{
+
 		//if no filename if informed, use
 		// the name of the file describing the scene
 		m_filename = m_filename.substr(0, m_filename.find(".json"));
 	}
 
-	try{
+	try
+	{
 		m_overwrite = j.at("scene").at("overwrite_file");
-	} catch (json::exception e){
+	}
+	catch (json::exception e)
+	{
 		//does nothing
 	}
 
@@ -37,7 +43,7 @@ json art::File::read()
 /**
  * @brief Read json and save figures to canvas
  */
-std::unique_ptr<art::Canvas> art::File::create_canvas(json &j)
+std::unique_ptr<art::Buffer> art::File::create_canvas(json &j)
 {
 
 	// Get scene
@@ -47,10 +53,10 @@ std::unique_ptr<art::Canvas> art::File::create_canvas(json &j)
 	auto h = scene.at("camera").at("height");
 	auto w = scene.at("camera").at("width");
 
-	return std::make_unique<Canvas>(w, h);
+	return std::make_unique<Buffer>(w, h);
 }
 
-void art::File::save_ppm(const art::Canvas &c)
+void art::File::save_ppm(const art::Buffer &c)
 {
 
 	element_t *image = c.pixels();
@@ -68,10 +74,10 @@ void art::File::save_ppm(const art::Canvas &c)
 	file << width << " "
 		 << height << "\n";
 	file << 255 << "\n";
-	
-	for (size_t y = height-1; y > 0 ; --y)
+
+	for (size_t y = height - 1; y > 0; --y)
 	{
-		for ( size_t x = 0; x < width; x++)
+		for (size_t x = 0; x < width; x++)
 		{
 			for (size_t z = 0u; z < 3u; z++)
 			{
@@ -120,26 +126,30 @@ std::unique_ptr<art::Background> art::File::create_background(json &j)
 */
 std::string art::File::new_name()
 {
-	if( m_overwrite ){
+	if (m_overwrite)
+	{
 		//Rename file if necessary
 		// @see https://stackoverflow.com/questions/612097/how-can-i-get-the-list-of-files-in-a-directory-using-c-or-c
 		DIR *dir;
 		struct dirent *ent;
-		if ((dir = opendir ("./gallery")) != NULL) {
+		if ((dir = opendir("./gallery")) != NULL)
+		{
 			int file = 0;
-			while ((ent = readdir (dir)) != NULL) {
+			while ((ent = readdir(dir)) != NULL)
+			{
 				// count how many files with that name exists
-				std::string name =  ent->d_name;
+				std::string name = ent->d_name;
 				bool exists_one = name.substr(0, name.find(".")) == m_filename;
 				bool exists_more = name.substr(0, name.find_last_of("_")) == m_filename;
-				if( exists_one || exists_more)
+				if (exists_one || exists_more)
 					file++;
 			}
 			return m_filename + "_" + std::to_string(file);
-			closedir (dir);
-		} else {
+			closedir(dir);
+		}
+		else
+		{
 			/* could not open directory */
-
 		}
 	}
 	return m_filename;

@@ -6,7 +6,7 @@
 #include <memory> //unique_ptr, make_unique
 
 #include "color.h"
-#include "canvas.h"
+#include "buffer.h"
 #include "background.h"
 
 #include "common.h"
@@ -35,11 +35,11 @@ public:
   /**
    * @brief Create a canvas object based on the json read.
    */
-  std::unique_ptr<Canvas> create_canvas(json &j);
+  std::unique_ptr<Buffer> create_canvas(json &j);
 
   std::unique_ptr<Background>  create_background(json &j);
 
-  void save_ppm(const Canvas &b);
+  void save_ppm(const Buffer &b);
 
   /**
    * @brief Get filename to new image*
