@@ -34,39 +34,15 @@ void art::Background::pixel(size_t x, size_t y, Color &c)
  */
 art::Vector3 art::Background::billinear(float t_x, float t_y)
 {
-
-    auto red_c1 = m_colors[0][RGB::RED];
-    auto red_c2 = m_colors[1][RGB::RED];
-    auto red_c3 = m_colors[2][RGB::RED];
-    auto red_c4 = m_colors[3][RGB::RED];
-
-    auto green_c1 = m_colors[0][RGB::GREEN];
-    auto green_c2 = m_colors[1][RGB::GREEN];
-    auto green_c3 = m_colors[2][RGB::GREEN];
-    auto green_c4 = m_colors[3][RGB::GREEN];
-
-    auto blue_c1 = m_colors[0][RGB::BLUE];
-    auto blue_c2 = m_colors[1][RGB::BLUE];
-    auto blue_c3 = m_colors[2][RGB::BLUE];
-    auto blue_c4 = m_colors[3][RGB::BLUE];
-
     //Interpolate twice on the x axis
     // Bottom
     Vector3 color_bottom = m_colors[0] + (m_colors[3] - m_colors[0]) * t_x;
-    // double new_red_1 = red_c1 + (red_c4 - red_c1) * t_x;
-    // double new_green_1 = green_c1 + (green_c4 - green_c1) * t_x;
-    // double new_blue_1 = blue_c1 + (blue_c4 - blue_c1) * t_x;
+    
     // Top
     Vector3 color_top = m_colors[1] + (m_colors[2] - m_colors[1]) * t_x;
-    // double new_red_2 = red_c2 + (red_c3 - red_c2) * t_x;
-    // double new_green_2 = green_c2 + (green_c3 - green_c2) * t_x;
-    // double new_blue_2 = blue_c2 + (blue_c3 - blue_c2) * t_x;
 
     // Interpolate on the y axis
     Vector3 new_color = color_bottom + (color_top - color_bottom) * t_y;
-    //double new_red = new_red_1 + (new_red_2 - new_red_1) * t_y;
-    //double new_green = new_green_1 + (new_green_2 - new_green_1) * t_y;
-    // double new_blue = new_blue_1 + (new_blue_2 - new_blue_1) * t_y;
 
     return new_color;
 }

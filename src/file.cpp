@@ -3,8 +3,9 @@
 #include <dirent.h>
 
 art::File::File(std::string filename)
-	: m_filename(filename), m_overwrite(false),
-	m_extension(".ppm")
+	: m_filename(filename),
+	m_extension(".ppm"),
+	m_overwrite(false)
 { 
   /*empty*/
 }
@@ -86,7 +87,7 @@ void art::File::save_ppm(const art::Buffer &c)
 		 << height << "\n";
 	file << 255 << "\n";
 
-	for (size_t y = height - 1; y > 0; --y)
+	for (int y = height - 1; y >= 0; y--)
 	{
 		for (size_t x = 0; x < width; x++)
 		{
