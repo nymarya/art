@@ -92,6 +92,21 @@ namespace art{
             Vector3& operator/=(const component_t t);
 
             /**
+             * @brief Override operator for sum between vectors.
+             */
+            Vector3 operator+(const art::Vector3 &v2);
+
+            /**
+             * @brief Override operator for difference between vectors.
+             */
+            Vector3 operator-(const art::Vector3 &v2);
+
+            /**
+             * @brief Override operator for division between vector and scalar.
+             */
+            Vector3 operator*( component_t t);
+
+            /**
              * @brief Access element.
              */
             component_t operator[](int i) const;

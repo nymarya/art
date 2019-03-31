@@ -52,20 +52,23 @@ art::Vector3 art::Background::billinear(float t_x, float t_y)
 
     //Interpolate twice on the x axis
     // Bottom
-    double new_red_1 = red_c1 + (red_c4 - red_c1) * t_x;
-    double new_green_1 = green_c1 + (green_c4 - green_c1) * t_x;
-    double new_blue_1 = blue_c1 + (blue_c4 - blue_c1) * t_x;
+    Vector3 color_bottom = m_colors[0] + (m_colors[3] - m_colors[0]) * t_x;
+    // double new_red_1 = red_c1 + (red_c4 - red_c1) * t_x;
+    // double new_green_1 = green_c1 + (green_c4 - green_c1) * t_x;
+    // double new_blue_1 = blue_c1 + (blue_c4 - blue_c1) * t_x;
     // Top
-    double new_red_2 = red_c2 + (red_c3 - red_c2) * t_x;
-    double new_green_2 = green_c2 + (green_c3 - green_c2) * t_x;
-    double new_blue_2 = blue_c2 + (blue_c3 - blue_c2) * t_x;
+    Vector3 color_top = m_colors[1] + (m_colors[2] - m_colors[1]) * t_x;
+    // double new_red_2 = red_c2 + (red_c3 - red_c2) * t_x;
+    // double new_green_2 = green_c2 + (green_c3 - green_c2) * t_x;
+    // double new_blue_2 = blue_c2 + (blue_c3 - blue_c2) * t_x;
 
     // Interpolate on the y axis
-    double new_red = new_red_1 + (new_red_2 - new_red_1) * t_y;
-    double new_green = new_green_1 + (new_green_2 - new_green_1) * t_y;
-    double new_blue = new_blue_1 + (new_blue_2 - new_blue_1) * t_y;
+    Vector3 new_color = color_bottom + (color_top - color_bottom) * t_y;
+    //double new_red = new_red_1 + (new_red_2 - new_red_1) * t_y;
+    //double new_green = new_green_1 + (new_green_2 - new_green_1) * t_y;
+    // double new_blue = new_blue_1 + (new_blue_2 - new_blue_1) * t_y;
 
-    return Vector3(new_red, new_green, new_blue);
+    return new_color;
 }
 
 /**

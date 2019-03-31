@@ -164,17 +164,17 @@ component_t &art::Vector3::operator[](int i)
 /**
  * @brief Override operator for sum between vectors.
  */
-art::Vector3 operator+(const art::Vector3 &v1, const art::Vector3 &v2)
+art::Vector3 art::Vector3::operator+(const art::Vector3 &v2)
 {
-    return art::Vector3(v1[0] + v2[0], v1[1] + v2[1], v1[2] + v2[2]);
+    return art::Vector3(m_components[0] + v2[0], m_components[1] + v2[1], m_components[2] + v2[2]);
 }
 
 /**
  * @brief Override operator for difference between vectors.
  */
-art::Vector3 operator-(const art::Vector3 &v1, const art::Vector3 &v2)
+art::Vector3 art::Vector3::operator-(const art::Vector3 &v2)
 {
-    return art::Vector3(v1[0] - v2[0], v1[1] - v2[1], v1[2] - v2[2]);
+    return art::Vector3(m_components[0] - v2[0], m_components[1] - v2[1], m_components[2] - v2[2]);
 }
 
 /**
@@ -212,9 +212,9 @@ art::Vector3 operator/(art::Vector3 v, component_t t)
 /**
  * @brief Override operator for multiplication between vector and scalar.
  */
-art::Vector3 operator*(const art::Vector3 &v, component_t t)
+art::Vector3 art::Vector3::operator*(component_t t)
 {
-    return art::Vector3(t * v[0], t * v[1], t * v[2]);
+    return art::Vector3(t * m_components[0], t * m_components[1], t * m_components[2]);
 }
 
 /**
