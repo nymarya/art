@@ -21,13 +21,12 @@ namespace art{
             Background(Color &c, std::string type);
 
             /**
-             * @brief Constructs background with solid color.
+             * @brief Constructs background with 4 colors (gradient).
              */
             Background(Color &c1, Color &c2, Color &c3, Color &c4, std::string type);
 
             ~Background() = default;
 
-            void pixel( size_t x, size_t y, Color &c);
             /**
              * @brief Get the pixel color from background.
              */

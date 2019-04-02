@@ -10,7 +10,7 @@ art::Background::Background(Color &c, std::string type)
 }
 
 /**
- * @brief Constructs background with solid color.
+ * @brief Constructs background with 4 colors(gradient).
  */
 art::Background::Background(Color &c1, Color &c2, Color &c3, Color &c4, std::string type)
 :m_type(type)    
@@ -22,10 +22,6 @@ art::Background::Background(Color &c1, Color &c2, Color &c3, Color &c4, std::str
 
 }
 
-
-void art::Background::pixel(size_t x, size_t y, Color &c)
-{
-}
 
 /**
  * @brief

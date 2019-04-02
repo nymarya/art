@@ -31,5 +31,5 @@ int main()
           }
      }
 
-     file.save_ppm(*c.get());
+     file.save(w, h, c->pixels());
 }
