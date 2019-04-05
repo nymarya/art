@@ -4,7 +4,7 @@
 
 art::File::File(std::string filename)
 	: m_filename(filename),
-	m_extension(".ppm"),
+	m_extension("ppm"),
 	m_overwrite(false)
 { 
   /*empty*/
@@ -62,18 +62,18 @@ std::unique_ptr<art::Buffer> art::File::create_canvas(json &j)
 /**
  * @brief Save image to file
  */
-void art::File::save(const Buffer &b){
+void art::File::save(size_t width, size_t height, const element_t * data){
 	file_methot_t save_method = funcMap[m_extension];
-	(this->*save_method)(b);
+	(this->*save_method)(width, height, data);
 }
 
 
-void art::File::save_ppm(const art::Buffer &c)
+void art::File::save_ppm(size_t width, size_t height, const element_t * data)
 {
 
-	element_t *image = c.pixels();
-	size_t width = c.width();
-	size_t height = c.height();
+	//element_t *image = c.pixels();
+	//size_t width = c.width();
+	//size_t height = c.height();
 
 	std::ofstream file;
 
@@ -95,7 +95,7 @@ void art::File::save_ppm(const art::Buffer &c)
 			{
 				//y * width + x + width * height * 2
 				auto index = y * width + x + width * height * z;
-				file << static_cast<unsigned>(image[index]) << " ";
+				file << static_cast<unsigned>(data[index]) << " ";
 			}
 		}
 		file << "\n";
@@ -107,15 +107,12 @@ void art::File::save_ppm(const art::Buffer &c)
 /**
  * @brief Save image to .png file.
  */
-void art::File::save_png(const art::Buffer &b){
+void art::File::save_png( const size_t width, const size_t height, const element_t * data){
 	std::string folder = "gallery/";
 	std::string extension = ".png";
 	std::string path = folder + this->new_name() + extension;
 
-	int w = b.width();
-	int h = b.height();
-
-	//stbi_write_png(path, w, h, int comp, const void *data, int stride_in_bytes);
+	//stbi_write_png(path.c_str, width, height, depth, data, stride);
 
 }
 
@@ -136,11 +133,14 @@ std::unique_ptr<art::Background> art::File::create_background(json &j)
 	else if (name == "gradient")
 	{
 		std::vector<std::vector<color_t>> color = scene.at("colors");
-		art::Color c1 = art::Color(color[0][0], color[0][1], color[0][2]);
-		art::Color c2 = art::Color(color[1][0], color[1][1], color[1][2]);
-		art::Color c3 = art::Color(color[2][0], color[2][1], color[2][2]);
-		art::Color c4 = art::Color(color[3][0], color[3][1], color[3][2]);
-		return std::make_unique<art::Background>(c1, c2, c3, c4, name);
+		std::vector<Color> bkg_colors;
+		for(auto i=0u; i< color.size(); i++)
+			bkg_colors.push_back(art::Color(color[i][0], color[i][1], color[i][2]));
+
+		return std::make_unique<art::Background>(bkg_colors[0], 
+												bkg_colors[1],
+												bkg_colors[2], 
+												bkg_colors[3], name);
 	}
 	else
 	{
@@ -153,7 +153,7 @@ std::unique_ptr<art::Background> art::File::create_background(json &j)
 */
 std::string art::File::new_name()
 {
-	if (m_overwrite)
+	if (!m_overwrite)
 	{
 		//Rename file if necessary
 		// @see https://stackoverflow.com/questions/612097/how-can-i-get-the-list-of-files-in-a-directory-using-c-or-c
