@@ -1,2 +1,0 @@
-# art
-Another Ray Tracer

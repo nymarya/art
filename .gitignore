@@ -1,8 +1,0 @@
-/build
-/gallery
-
-*.out
-*.d
-*.o
-
-.vscode/
