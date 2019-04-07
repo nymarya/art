@@ -19,13 +19,15 @@ using json = nlohmann::json;
 
 namespace art
 {
-
+constexpr int stride = 0;
+constexpr int depth = 3;
 /**
  * Provide the method to read and save files
  */
 class File
 {
-typedef void (File::*file_methot_t)(const Buffer&);
+typedef void (File::*file_methot_t)(size_t width, size_t height, const element_t * data);
+
 public:
   File(std::string filename);
 
@@ -46,17 +48,17 @@ public:
   /**
    * @brief Save image to file
    */
-  void save(const Buffer &b);
+  void save(size_t width, size_t height, const element_t * data);
 
   /**
    * @brief Save image to .ppm file.
    */
-  void save_ppm(const Buffer &b);
+  void save_ppm(size_t width, size_t height, const element_t * data);
 
   /**
    * @brief Save image to .png file.
    */
-  void save_png(const Buffer &b);
+  void save_png(size_t width, size_t height, const element_t * data);
 
   /**
    * @brief Get filename to new image*
