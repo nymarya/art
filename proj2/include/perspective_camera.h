@@ -1,0 +1,26 @@
+#ifndef _perspective_h_
+#define _perspective_h_
+
+#include "camera.h"
+
+namespace art{
+    /**
+     * @brief Class representing a perspective camera.
+     */
+    class PerspectiveCamera : public Camera
+    {
+        public:
+            PerspectiveCamera(const size_t width, const size_t height);
+            ~PerspectiveCamera();
+
+            /**
+             * @brief Generate a ray with passing through (x,y).
+             */
+            Ray generate_ray(int x, int y);
+        private:
+        /* data */
+    };
+    
+}
+
+#endif
