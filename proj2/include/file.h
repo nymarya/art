@@ -9,6 +9,8 @@
 #include "color.h"
 #include "buffer.h"
 #include "background.h"
+#include "ortho_camera.h"
+#include "perspective_camera.h"
 
 #include "common.h"
 
@@ -44,6 +46,11 @@ public:
   std::unique_ptr<Buffer> create_canvas(json &j);
 
   std::unique_ptr<Background>  create_background(json &j);
+
+  /**
+   * @brief Create camera object based on the json read.
+   */
+  std::unique_ptr<Camera>  create_camera(json &j);
 
   /**
    * @brief Save image to file

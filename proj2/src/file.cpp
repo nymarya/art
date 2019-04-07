@@ -148,6 +148,32 @@ std::unique_ptr<art::Background> art::File::create_background(json &j)
 	}
 }
 
+std::unique_ptr<art::Camera> art::File::create_camera(json &j)
+{
+	auto camera = j.at("scene").at("camera");
+	std::string name = camera.at("type");
+
+	if (name == "orthographic")
+	{
+		auto w = camera.at("width");
+		auto h = camera.at("height");
+
+		return std::make_unique<art::OrthoCamera>(w, h);
+	}
+	else if (name == "perspective")
+	{
+		auto w = camera.at("width");
+		auto h = camera.at("height");
+
+		return std::make_unique<art::PerspectiveCamera>(w, h);
+	}
+	else
+	{
+		throw std::invalid_argument("Invalid syntax. Type not found: " + name);
+	}
+
+}
+
 /**
 * @brief Get filenama to new image*
 */
