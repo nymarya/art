@@ -1,0 +1,6 @@
+/build
+/gallery
+
+*.out
+*.d
+*.o
