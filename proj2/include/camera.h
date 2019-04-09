@@ -12,7 +12,8 @@ namespace art{
     class Camera
     {
     public:
-        Camera(const size_t width, const size_t height);
+        Camera(const size_t width, const size_t height, Vector3 position, 
+                Vector3 target, Vector3 up);
         ~Camera() = default;
 
         /**
@@ -22,6 +23,8 @@ namespace art{
 
     private:
         size_t m_width, m_height;
+
+        Vector3 m_position, m_target, m_up;
     };
     
 }

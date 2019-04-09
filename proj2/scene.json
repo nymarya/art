@@ -2,7 +2,17 @@
     "scene":{
         "camera":{
             "width": 200,
-            "height": 100
+            "height": 100,
+            "type": "ortographic",
+            "position":  [0, 0, 0], 
+            "target": [0,0,-10], 
+            "up": [0,1,1],
+            "vpdim": {
+                "l":-3, 
+                "r": 3, 
+                "b":-2.25, 
+                "t":2.25
+            } 
         },
         "background":{
             "type": "gradient",

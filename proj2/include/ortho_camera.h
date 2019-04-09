@@ -10,7 +10,8 @@ namespace art{
     class OrthoCamera : public Camera
     {
         public:
-            OrthoCamera(const size_t width, const size_t height);
+            OrthoCamera(const size_t width, const size_t height, 
+            Vector3 position, Vector3 target, Vector3 up, int *vdim );
             ~OrthoCamera() = default;
 
             /**
@@ -20,6 +21,7 @@ namespace art{
 
         private:
             /*data*/
+            int* m_vdim;
     };
 
     

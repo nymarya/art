@@ -153,19 +153,35 @@ std::unique_ptr<art::Camera> art::File::create_camera(json &j)
 	auto camera = j.at("scene").at("camera");
 	std::string name = camera.at("type");
 
+	size_t w = camera.at("width");
+	size_t h = camera.at("height");
+	auto pos = camera.at("position");
+	Vector3 position(pos[0], pos[1], pos[2]);
+	auto t = camera.at("target");
+	Vector3 target(t[0], t[1], t[2]);
+	auto u = camera.at("up");
+	Vector3 up(u[0], u[1], u[2]);
+
 	if (name == "orthographic")
 	{
-		auto w = camera.at("width");
-		auto h = camera.at("height");
-
-		return std::make_unique<art::OrthoCamera>(w, h);
+		
+		auto vdim = camera.at("vpdim");
+		int* vpdim = new int[4];
+		vpdim[0] = vdim[0]; 
+		vpdim[1] = vdim[1]; 
+		vpdim[2] = vdim[2];
+		vpdim[3] = vdim[3];
+		return std::make_unique<art::OrthoCamera>(w, h, position, target,
+											up, vpdim);
 	}
 	else if (name == "perspective")
 	{
-		auto w = camera.at("width");
-		auto h = camera.at("height");
+		float fovy = camera.at("fovy");
+		float aspect = camera.at("aspect");
+		float fdis = camera.at("fdistance");
 
-		return std::make_unique<art::PerspectiveCamera>(w, h);
+		return std::make_unique<art::PerspectiveCamera>(w, h, position, target,
+														up, fovy, aspect, fdis);
 	}
 	else
 	{

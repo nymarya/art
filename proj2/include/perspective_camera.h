@@ -10,7 +10,10 @@ namespace art{
     class PerspectiveCamera : public Camera
     {
         public:
-            PerspectiveCamera(const size_t width, const size_t height);
+            PerspectiveCamera(const size_t width, const size_t height, 
+                            Vector3 position, Vector3 target, Vector3 up,
+                            component_t fovy, component_t aspect,
+                            component_t fdistance);
             ~PerspectiveCamera();
 
             /**
@@ -18,7 +21,8 @@ namespace art{
              */
             Ray generate_ray(int x, int y);
         private:
-        /* data */
+            /* data */
+            component_t m_fovy , m_aspect, m_fdistance; 
     };
     
 }
