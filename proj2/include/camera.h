@@ -21,10 +21,21 @@ namespace art{
          */
         virtual Ray generate_ray(int x, int y) = 0;
 
+        /**
+         * @brief Get width.
+         */
+        size_t width();
+
+        /**
+         * @brief Get height.
+         */
+        size_t height();
+
+    Vector3 m_position, m_target, m_up;
     private:
         size_t m_width, m_height;
 
-        Vector3 m_position, m_target, m_up;
+        
     };
     
 }

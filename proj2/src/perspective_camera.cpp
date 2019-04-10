@@ -12,5 +12,5 @@ m_aspect(aspect), m_fdistance(fdistance)
  */
 art::Ray art::PerspectiveCamera::generate_ray(int x, int y)
 {
-
+    
 }

@@ -228,9 +228,18 @@ component_t dot(const art::Vector3 &v1, const art::Vector3 &v2)
 /**
  * @brief Override operator for product between vectors.
  */
-art::Vector3 cross(const art::Vector3 &v1, const art::Vector3 &v2)
+art::Vector3 art::Vector3::cross(const art::Vector3 &v2)
 {
+    auto v1 = m_components;
     return art::Vector3((v1[1] * v2[2] - v1[2] * v2[1]),
                         (-(v1[0] * v2[2] - v1[2] * v2[0])),
                         (v1[0] * v2[1] - v1[1] * v2[0]));
+}
+
+/**
+ * @brief Make unit vector
+ */
+art::Vector3 art::Vector3::normalize()
+{
+    return art::Vector3(0,0,0);
 }

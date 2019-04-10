@@ -116,6 +116,16 @@ namespace art{
              */
             component_t& operator[](int i);
 
+            /**
+             * @brief Override operator for product between vectors.
+             */
+            Vector3 cross(const art::Vector3 &v2);
+
+            /**
+             * @brief Make unit vector
+             */
+            Vector3 normalize();
+
         private:
             /// Content
             component_t m_components[3];
