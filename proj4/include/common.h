@@ -3,6 +3,9 @@
 
 #include <iostream>
 
+#include "primitive.h"
+#include "surface_interaction.h"
+
 using component_t = float;
 typedef long coord_type;
 
