@@ -18,11 +18,6 @@ namespace art{
         Ray(const Point3& o, const Vector3& d );
         ~Ray() = default;
 
-        /**
-         * @brief Override operator () 
-         */
-        Point3& operator() (const component_t t) { return m_o + m_d * t; } 
-
         friend std::ostream& operator<< (std::ostream &os, const Ray &t){
             os << "[o=" << t.m_o <<", d=" << t.m_d << "]";
             return os;

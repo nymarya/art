@@ -3,10 +3,12 @@
 
 #include "vector3.h"
 #include "camera.h"
+#include "color.h"
 #include "file.h"
 #include "json.hpp"
 #include "buffer.h"
 #include "background.h"
+#include "primitive.h"
 
 using namespace art;
 
@@ -16,28 +18,27 @@ int main()
      File file("scene.json");
      json j = file.read();
 
-     std::unique_ptr<Camera> cam = file.create_camera(j);
+     std::vector<std::shared_ptr<Primitive>> scene;
+     std::shared_ptr<Camera> cam = file.create_camera(j);
      std::unique_ptr<Buffer> c = file.create_canvas(j);
      std::unique_ptr<Background> background = file.create_background(j);
 
      auto h = c->height();
      auto w = c->width();
-     for (int j = h - 1; j >= 0; j--)
+     for (auto i = 0; i < h; i++)
      {
-          for (auto i = 0u; i < w; i++)
+          for (auto j = 0u; j < w; j++)
           {
-               Point3 screen_coord( float(i)/float(w), float(j)/float(h), 0 );
-               // Generate ray with the view plane frame method.
-               Ray r1 = cam->generate_ray( float(i)/float(w), float(j)/float(h) );
+               Point3 screen_coord(float(i) / float(w), float(j) / float(h), 0);
                // Generate ray with the Shirley method.
-               Ray r2 = cam->generate_ray( i, j );
-               // Print out the two rays, that must be the same (regardless of the method).
-               std::cout << "pixel (" <<i << "," << j << ")  ray:";
-               std::cout << r1 << std::endl;
-               std::cout << "pixel (" <<i << "," << j << ")  ray:";
-               std::cout << r2 << std::endl;
-               auto color = background->color(float(i) / float(w), float(j) / float(h)); // get background color.
-               c->pixel(i, j, color);                                          // set image buffer at position (i,j), accordingly.
+               Ray ray = cam->generate_ray(j, i);
+               auto color = background->color(float(j) / float(w), float(i) / float(h)); // get background color.
+               for (const Primitive &p : scene)
+               {                                                  // Traverse each object.
+                    if (p.intersect_p(ray))                       // Does the ray hit any sphere in the scene?
+                         color = Vector3(255, 255, 255);              // Just paint it red.
+                    c->pixel((h-1) * i, j, color); // set image buffer at position (i,j), accordingly.
+               }
           }
      }
 

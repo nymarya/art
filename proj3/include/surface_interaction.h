@@ -16,7 +16,7 @@ namespace art{
             Vector3 m_wo; // Outgoing direction of light, which is -ray.
             float m_time; // Time of contact.
             Point3D m_uv; // Parametric coordinate (u,v) of the hit surface.
-            const Primitive *m_primitive=nullptr; // Pointer to the primitive.
+            //const Primitive *m_primitive=nullptr; // Pointer to the primitive.
         };
 }
 
