@@ -33,9 +33,9 @@ int main()
                // Generate ray with the Shirley method.
                Ray ray = cam->generate_ray(j, i);
                auto color = background->color(float(j) / float(w), float(i) / float(h)); // get background color.
-               for (const Primitive &p : scene)
+               for (const std::shared_ptr<art::Primitive> &p : scene)
                {                                                  // Traverse each object.
-                    if (p.intersect_p(ray))                       // Does the ray hit any sphere in the scene?
+                    if (p->intersect_p(ray))                       // Does the ray hit any sphere in the scene?
                          color = Vector3(255, 255, 255);              // Just paint it red.
                     c->pixel((h-1) * i, j, color); // set image buffer at position (i,j), accordingly.
                }

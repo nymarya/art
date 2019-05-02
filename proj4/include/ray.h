@@ -21,12 +21,13 @@ namespace art{
         /**
          * @brief Override operator () 
          */
-        Point3& operator() (const component_t t) { return m_o + m_d * t; } 
+        void operator()(component_t t);
 
+        /**
         friend std::ostream& operator<< (std::ostream &os, const Ray &t){
             os << "[o=" << t.m_o <<", d=" << t.m_d << "]";
             return os;
-        }
+        }**/
 
     private:
         Point3 m_o; //!< origin
