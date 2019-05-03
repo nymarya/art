@@ -4,8 +4,6 @@
 #include "common.h"
 #include "ray.h"
 #include "material.h"
-#include <memory>
-#include "surface_interaction.h"
 
 namespace art{
 
@@ -16,7 +14,7 @@ namespace art{
             // Simpler & faster version of intersection that only return true/false.
             // It does not compute the hit point information.
             virtual bool intersect_p( const Ray& r ) const = 0;
-            virtual const Material * get_material(void) const;
+            virtual const Material * get_material(void) const { return material; }
         private:
             std::shared_ptr<Material> material;
     };
