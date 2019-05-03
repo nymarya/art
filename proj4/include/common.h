@@ -3,7 +3,6 @@
 
 #include <iostream>
 
-
 using component_t = float;
 typedef long coord_type;
 

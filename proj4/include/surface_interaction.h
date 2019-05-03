@@ -1,10 +1,14 @@
 #ifndef _si_h_
 #define _si_h_
 
+#include "common.h"
 #include "point3d.h"
 #include "vector3.h"
+#include "includes.h"
 
 namespace art{
+    class Primitive; // Forward declaration 
+    
     class SurfaceInteraction {
         public:
             SurfaceInteraction(const Point3D &p,const Vector3&n, const Vector3&wo, float time,

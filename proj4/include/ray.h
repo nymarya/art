@@ -21,7 +21,7 @@ namespace art{
         /**
          * @brief Override operator () 
          */
-        void operator()(component_t t);
+        Point3 operator()(component_t t);
 
         /**
         friend std::ostream& operator<< (std::ostream &os, const Ray &t){
