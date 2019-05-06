@@ -1,4 +1,4 @@
-#include "../include/camera.h"
+#include "../include/camera/camera.h"
 
 art::Camera::Camera(const size_t width, const size_t height,
 Vector3 position, Vector3 target, Vector3 up)
@@ -20,4 +20,12 @@ size_t art::Camera::width()
 size_t art::Camera::height()
 {
     return m_height;
+}
+
+ /**
+ * @brief Get film.
+ */
+std::unique_ptr<art::Buffer> art::Camera::film()
+{
+    return m_film;
 }

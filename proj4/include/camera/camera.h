@@ -3,6 +3,7 @@
 
 #include <iostream>
 
+#include "buffer.h"
 #include "ray.h"
 
 namespace art{
@@ -36,10 +37,15 @@ namespace art{
          */
         size_t height();
 
+        /**
+         * @brief Get film.
+         */
+        Buffer film();
+
     Vector3 m_position, m_target, m_up;
     private:
         size_t m_width, m_height;
-
+        std::unique_ptr<Buffer> m_film;
         
     };
     

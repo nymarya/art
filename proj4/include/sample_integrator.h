@@ -1,8 +1,9 @@
 #ifndef _sampler_int_h_
 #define _sampler_int_h_
 
-#include "camera.h"
+#include "camera/camera.h"
 #include "integrator.h"
+#include "point2d.h"
 #include "sampler.h"
 
 namespace art{
