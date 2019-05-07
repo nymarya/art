@@ -21,7 +21,7 @@ json art::File::read()
 
 	try
 	{
-		m_filename = j.at("scene").at("filename");
+		m_filename = j.at("filename");
 	}
 	catch (json::exception e)
 	{
@@ -33,7 +33,7 @@ json art::File::read()
 
 	try
 	{
-		m_overwrite = j.at("scene").at("overwrite_file");
+		m_overwrite = j.at("overwrite_file");
 	}
 	catch (json::exception e)
 	{
@@ -150,7 +150,7 @@ std::unique_ptr<art::Background> art::File::create_background(json &j)
 
 std::unique_ptr<art::Camera> art::File::create_camera(json &j)
 {
-	auto camera = j.at("scene").at("camera");
+	auto camera = j.at("camera");
 	std::string name = camera.at("type");
 
 	size_t w = camera.at("width");
@@ -187,6 +187,12 @@ std::unique_ptr<art::Camera> art::File::create_camera(json &j)
 	{
 		throw std::invalid_argument("Invalid syntax. Type not found: " + name);
 	}
+
+}
+
+std::unique_ptr<art::Primitive> create_primitives(json &j){
+
+	auto objects = j.at("scene").at("objects");
 
 }
 

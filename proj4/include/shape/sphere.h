@@ -9,11 +9,11 @@ namespace art {
     {
         
         public:
-            Sphere(Point3D center, int radius);
+            Sphere(Point3D center, float radius);
             ~Sphere();
         private:
             Point3D m_center;
-            int m_radius;
+            float m_radius;
     };
 
     

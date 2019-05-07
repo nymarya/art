@@ -58,11 +58,11 @@ void init_engine()
      std::shared_ptr<Primitive> agg = file.create_primitives(j);
 
      std::shared_ptr<Sampler> sampler(new Sampler());
-     if (parser.integrator.compare("flat") == 0)
-     {
-          FlatIntegrator *fi = new FlatIntegrator(parser.camera, sampler);
-          g_integrator = std::unique_ptr<Integrator>(fi);
-     }
+     // if (parser.integrator.compare("flat") == 0)
+     // {
+     //      FlatIntegrator *fi = new FlatIntegrator(parser.camera, sampler);
+     //      g_integrator = std::unique_ptr<Integrator>(fi);
+     // }
 
      g_integrator = file.create_integrator(j, g_camera, sampler);
      // We create the scene last, because we need all the other objects first.
