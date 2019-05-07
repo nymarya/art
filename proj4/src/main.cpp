@@ -9,6 +9,7 @@
 #include "buffer.h"
 #include "background.h"
 #include "primitive.h"
+#include "sampler.h"
 
 using namespace art;
 
@@ -63,9 +64,9 @@ void init_engine()
           g_integrator = std::unique_ptr<Integrator>(fi);
      }
 
-     g_integrator = std::make_unique<FlatIntegrator>(cam, sampler);
+     g_integrator = file.create_integrator(j, g_camera, sampler);
      // We create the scene last, because we need all the other objects first.
      // create a scene
-     Scene scene = Scene(agg, background, lights);
+     Scene scene = Scene(agg, background);
      g_scene = std::make_unique<Scene>(scene);
 }
