@@ -5,7 +5,7 @@
 #include "../point3d.h"
 
 namespace art {
-    class Sphere
+    class Sphere : public Shape
     {
         
         public:
