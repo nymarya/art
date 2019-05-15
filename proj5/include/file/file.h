@@ -6,13 +6,15 @@
 #include <memory> //unique_ptr, make_unique
 #include <map> //map
 
-#include "color.h"
-#include "buffer.h"
-#include "background.h"
-#include "ortho_camera.h"
-#include "perspective_camera.h"
+#include "../color.h"
+#include "../buffer.h"
+#include "../background.h"
+#include "../camera/ortho_camera.h"
+#include "../camera/perspective_camera.h"
+#include "../primitive/primitive.h"
+#include "../shape/shape.h"
 
-#include "common.h"
+#include "../common.h"
 
 #include "json.hpp"
 #include "stb_image_write.h"
@@ -51,6 +53,14 @@ public:
    * @brief Create camera object based on the json read.
    */
   std::unique_ptr<Camera>  create_camera(json &j);
+
+  /**
+   * @brief Create primitive object based on the objects of
+   * the scene, which are defined at the json file.
+   */
+  std::unique_ptr<Primitive> create_primitives(json &j);
+
+  
 
   /**
    * @brief Save image to file

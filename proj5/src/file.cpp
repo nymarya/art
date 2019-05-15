@@ -1,13 +1,13 @@
-#include "../include/file.h"
+#include "../include/file/file.h"
 #include <typeinfo>
 #include <dirent.h>
 
 art::File::File(std::string filename)
 	: m_filename(filename),
-	m_extension("ppm"),
-	m_overwrite(false)
-{ 
-  /*empty*/
+	  m_extension("ppm"),
+	  m_overwrite(false)
+{
+	/*empty*/
 }
 /**
  * @brief Read json and save figures to canvas
@@ -62,13 +62,13 @@ std::unique_ptr<art::Buffer> art::File::create_canvas(json &j)
 /**
  * @brief Save image to file
  */
-void art::File::save(size_t width, size_t height, const element_t * data){
+void art::File::save(size_t width, size_t height, const element_t *data)
+{
 	file_methot_t save_method = funcMap[m_extension];
 	(this->*save_method)(width, height, data);
 }
 
-
-void art::File::save_ppm(size_t width, size_t height, const element_t * data)
+void art::File::save_ppm(size_t width, size_t height, const element_t *data)
 {
 
 	//element_t *image = c.pixels();
@@ -107,13 +107,13 @@ void art::File::save_ppm(size_t width, size_t height, const element_t * data)
 /**
  * @brief Save image to .png file.
  */
-void art::File::save_png( const size_t width, const size_t height, const element_t * data){
+void art::File::save_png(const size_t width, const size_t height, const element_t *data)
+{
 	std::string folder = "gallery/";
 	std::string extension = ".png";
 	std::string path = folder + this->new_name() + extension;
 
 	//stbi_write_png(path.c_str, width, height, depth, data, stride);
-
 }
 
 /**
@@ -134,13 +134,13 @@ std::unique_ptr<art::Background> art::File::create_background(json &j)
 	{
 		std::vector<std::vector<color_t>> color = scene.at("colors");
 		std::vector<Color> bkg_colors;
-		for(auto i=0u; i< color.size(); i++)
+		for (auto i = 0u; i < color.size(); i++)
 			bkg_colors.push_back(art::Color(color[i][0], color[i][1], color[i][2]));
 
-		return std::make_unique<art::Background>(bkg_colors[0], 
-												bkg_colors[1],
-												bkg_colors[2], 
-												bkg_colors[3], name);
+		return std::make_unique<art::Background>(bkg_colors[0],
+												 bkg_colors[1],
+												 bkg_colors[2],
+												 bkg_colors[3], name);
 	}
 	else
 	{
@@ -165,14 +165,14 @@ std::unique_ptr<art::Camera> art::File::create_camera(json &j)
 	if (name == "orthographic")
 	{
 		auto vdim = camera.at("vpdim");
-		
-		int* vpdim = new int[4];
-		vpdim[0] = vdim.at("b"); 
-		vpdim[1] = vdim.at("l"); 
-		vpdim[2] = vdim.at("r"); 
-		vpdim[3] = vdim.at("t"); 
+
+		int *vpdim = new int[4];
+		vpdim[0] = vdim.at("b");
+		vpdim[1] = vdim.at("l");
+		vpdim[2] = vdim.at("r");
+		vpdim[3] = vdim.at("t");
 		return std::make_unique<art::OrthoCamera>(w, h, position, target,
-											up, vpdim);
+												  up, vpdim);
 	}
 	else if (name == "perspective")
 	{
@@ -187,13 +187,24 @@ std::unique_ptr<art::Camera> art::File::create_camera(json &j)
 	{
 		throw std::invalid_argument("Invalid syntax. Type not found: " + name);
 	}
-
 }
 
-std::unique_ptr<art::Primitive> create_primitives(json &j){
+/**
+ * @brief Create primitive object based on the objects of
+ * the scene, which are defined at the json file.
+ */
+std::unique_ptr<art::Primitive> art::File::create_primitives(json &j)
+{
 
 	auto objects = j.at("scene").at("objects");
 
+	// Create shapes
+	for (auto object : objects)
+	{
+		Shape()
+	}
+
+	// Create primitives
 }
 
 /**

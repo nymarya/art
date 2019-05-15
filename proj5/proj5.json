@@ -1,0 +1,75 @@
+{
+    "camera":{
+        "width": 40,
+        "height": 30,
+        "type": "orthographic",
+        "position":  [0, 0, 0], 
+        "target": [0,0,-10], 
+        "up": [0,1,1],
+        "vpdim": {
+            "l":-3, 
+            "r": 3, 
+            "b":-2.25, 
+            "t":2.25
+        } 
+    },
+    "scene":{
+        "background":{
+            "type": "gradient",
+            "colors":[
+                [0, 0, 51],
+                [0, 255, 51],
+                [255, 255, 51],
+                [255,0,51]
+            ]
+        },
+        "objects":[ 
+            { "type": "sphere", 
+                "name":"sphere1", "material":"green",
+                "radius":"0.4",
+                "center":{ "x":"-1.0", "y":"0.5", "z":"-5"}
+            },
+            { "type": "sphere", 
+                "name":"sphere2", "material":"green",
+                "radius":"0.4",
+                "center":{ "x":"1.0", "y":"-0.5", "z":"-8"}
+            },
+            { "type": "sphere", 
+                "name":"sphere3", "material":"gold",
+                "radius":"0.4",
+                "center":{ "x":"-1.0", "y":"-1.5", "z":"-3.5"}
+            },
+            { "type": "sphere", 
+                "name":"sphere4", "material":"pink",
+                "radius":"0.4",
+                "center":{ "x":"7.0", "y":"1.5", "z":"-10"}
+            }
+        ],
+        "materials":[
+            { "type":"flat", "name":"gold",
+                "diffuse":
+                    {
+                        "r":236, "g":124, "b":17
+                    }
+            },
+            {
+                "type":"flat", "name":"green",
+                "diffuse":
+                    {
+                        "r":42, "g":201, "b":51
+                    }
+            },
+            {
+                "type":"flat", "name":"pink",
+                "diffuse":
+                    {
+                        "r":253, "g":153, "b":253
+                    }
+            }
+        ] 
+    },
+    "filename":"teste_flat",
+    "overwrite_file": false,
+    "integrator": "flat",
+    "spp":1
+}

@@ -1,9 +1,9 @@
 #ifndef _primitive_h_
 #define _primitive_h_
 
-#include "ray.h"
-#include "material.h"
-#include "includes.h"
+#include "../ray.h"
+#include "../material/material.h"
+#include "../includes.h"
 
 namespace art{
 
