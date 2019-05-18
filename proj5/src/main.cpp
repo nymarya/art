@@ -62,6 +62,7 @@ void init_engine()
      std::shared_ptr<Integrator> g_integrator = file.create_integrator(j, g_camera, sampler);
      // We create the scene last, because we need all the other objects first.
      // create a scene
-     Scene scene = Scene(agg, background);
+     
+     Scene scene = Scene(agg, std::make_shared<Background>(background.get()));
      std::unique_ptr<Scene> g_scene = std::make_unique<Scene>(scene);
 }
