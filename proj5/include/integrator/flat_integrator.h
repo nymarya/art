@@ -12,11 +12,12 @@ namespace art{
     {
     private:
         /* data */
-    public:
-        FlatIntegrator(/* args */);
-        ~FlatIntegrator();
+        public:
+            FlatIntegrator(std::shared_ptr<Camera> camera, std::shared_ptr<art::Sampler> sampler);
+            ~FlatIntegrator();
 
-        Color Li(const Ray& ray, const Scene& scene, Sampler& sampler);
+            Color Li( const Ray& ray, const Scene& scene, Sampler& sampler ) const;
+
     };
     
 }

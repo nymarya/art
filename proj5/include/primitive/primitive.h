@@ -9,6 +9,9 @@ namespace art{
 
     class Primitive {
         public:
+            Primitive(std::shared_ptr<Material> material)
+            :m_material(material){}
+
             virtual ~Primitive();
             virtual bool intersect( const Ray& r, SurfaceInteraction *) const = 0;
             // Simpler & faster version of intersection that only return true/false.

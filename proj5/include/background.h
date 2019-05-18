@@ -6,7 +6,7 @@
 #include <cmath>
 #include <vector> //vector
 
-#include "vector3.h"
+#include "geometry/vector3.h"
 #include "common.h"
 #include "color.h"
 

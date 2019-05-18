@@ -26,23 +26,23 @@
         "objects":[ 
             { "type": "sphere", 
                 "name":"sphere1", "material":"green",
-                "radius":"0.4",
-                "center":{ "x":"-1.0", "y":"0.5", "z":"-5"}
+                "radius":0.4,
+                "center":{ "x":-1.0, "y":0.5, "z":-5}
             },
             { "type": "sphere", 
                 "name":"sphere2", "material":"green",
-                "radius":"0.4",
-                "center":{ "x":"1.0", "y":"-0.5", "z":"-8"}
+                "radius":0.4,
+                "center":{ "x":1.0, "y":-0.5, "z":-8}
             },
             { "type": "sphere", 
                 "name":"sphere3", "material":"gold",
-                "radius":"0.4",
-                "center":{ "x":"-1.0", "y":"-1.5", "z":"-3.5"}
+                "radius":0.4,
+                "center":{ "x":-1.0, "y":-1.5, "z":-3.5}
             },
             { "type": "sphere", 
                 "name":"sphere4", "material":"pink",
-                "radius":"0.4",
-                "center":{ "x":"7.0", "y":"1.5", "z":"-10"}
+                "radius":0.4,
+                "center":{ "x":7.0, "y":1.5, "z":-10}
             }
         ],
         "materials":[
@@ -70,6 +70,10 @@
     },
     "filename":"teste_flat",
     "overwrite_file": false,
-    "integrator": "flat",
-    "spp":1
+    "running":{
+        "integrator": {
+            "type":"flat",
+            "spp":1
+        }
+    }
 }

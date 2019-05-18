@@ -3,16 +3,21 @@
 
 #include <string>
 #include <fstream>
-#include <memory> //unique_ptr, make_unique
+#include <memory> //unique_ptr, make_unique, shared_ptr
 #include <map> //map
 
 #include "../color.h"
 #include "../buffer.h"
 #include "../background.h"
+#include "../camera/camera.h"
 #include "../camera/ortho_camera.h"
 #include "../camera/perspective_camera.h"
-#include "../primitive/primitive.h"
+#include "../integrator/integrator.h"
+#include "../integrator/flat_integrator.h"
+#include "../material/flat_material.h"
+#include "../primitive/geometric_primitive.h"
 #include "../shape/shape.h"
+#include "../shape/sphere.h"
 
 #include "../common.h"
 
@@ -60,7 +65,15 @@ public:
    */
   std::unique_ptr<Primitive> create_primitives(json &j);
 
-  
+  /**
+   * @brief Create a integrator object
+   * 
+   * @param j 
+   * @param camera 
+   * @param sampler 
+   * @return std::unique_ptr<Integrator> 
+   */
+  std::unique_ptr<Integrator> create_integrator(json &j, std::shared_ptr<Camera> camera, std::shared_ptr<Sampler> sampler);
 
   /**
    * @brief Save image to file
@@ -82,6 +95,20 @@ public:
    */
   std::string new_name();
 
+  /**
+   * @brief Get the material object
+   * 
+   * @param name 
+   * @return std::shared_ptr<Material> 
+   */
+  std::shared_ptr<Material> material(std::string name);
+
+  /**
+   * @brief Load material from json into map.
+   * 
+   * @param j 
+   */
+  void load_materials(json &j);
 
 private:
   std::string m_filename, m_extension;
@@ -92,6 +119,9 @@ private:
     std::pair<std::string, file_methot_t>("ppm", &File::save_ppm),
     std::pair<std::string, file_methot_t>("png", &File::save_png) 
   };
+
+  //Map of materials
+  std::map<std::string, std::shared_ptr<Material>> m_materials;
 
 };
 } // namespace rstzr

@@ -16,15 +16,14 @@ namespace art{
         //=== Public data
         public:
             //std::vector<std::shared_ptr<Light>> lights; // list of lights
-            std::shared_ptr< Background > background; // The background object.
+            std::shared_ptr< Background > m_background; // The background object.
         private:
-            std::shared_ptr<Primitive> aggregate; // The scene graph of objects, acceleration structure.
+            std::shared_ptr<Primitive> m_aggregate; // The scene graph of objects, acceleration structure.
 
         //=== Public interface
         public:
-            Scene( std::shared_ptr<Primitive> ag )
-                :aggregate{ag}
-                //: lights{l}, aggregate{ag}
+            Scene( std::shared_ptr<Primitive> ag, std::shared_ptr<Background> bkg )
+                :m_background{bkg}, m_aggregate{ag}
                 {/* empty */}
             /// Determines the intersection info; return true if there is an intersection.
             bool intersect( const Ray& r, SurfaceInteraction *isect ) const;

@@ -1,7 +1,7 @@
 #ifndef _ray_h_
 #define _ray_h_
 
-#include "vector3.h"
+#include "geometry/vector3.h"
 
 namespace art{
 

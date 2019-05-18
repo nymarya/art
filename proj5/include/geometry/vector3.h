@@ -1,7 +1,7 @@
 #ifndef _vector3_h_
 #define _vector3_h_
 
-#include "common.h"
+#include "../common.h"
 
 using component_t = float;
 

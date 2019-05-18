@@ -201,10 +201,45 @@ std::unique_ptr<art::Primitive> art::File::create_primitives(json &j)
 	// Create shapes
 	for (auto object : objects)
 	{
-		Shape()
-	}
+		auto type = object.at("type");
+		auto name = object.at("name");
+		auto material = object.at("material");
+		//TODO: consultar map de material 
 
-	// Create primitives
+		if (type == "sphere")
+		{
+			auto radius = object.at("radius");
+			auto v_center = object.at("center");
+			Vector3 center = Vector3(v_center.at("x"), v_center.at("y"),
+									 v_center.at("z"));
+			//Create shape and primitive
+			std::unique_ptr<Shape> shape = std::make_unique<art::Shape>(center, 
+											radius, name, material);
+			return std::make_unique<art::GeometricPrimitive>(shape, material);
+		}
+		else
+		{
+			throw std::invalid_argument("Invalid syntax. Type not found: " + type);
+		}
+	}
+}
+
+/**
+ * @brief Create a integrator object
+ */
+std::unique_ptr<art::Integrator> art::File::create_integrator(json &j, std::shared_ptr<Camera> camera, 
+														std::shared_ptr<art::Sampler> sampler)
+{
+	auto integrator = j.at("running").at("integrator");
+	auto type = integrator.at("type");
+	if (type == "flat")
+	{
+	     return std::make_unique<FlatIntegrator>(camera, sampler);
+    }
+	else 
+	{
+		throw std::invalid_argument("Invalid syntax. Type not found: " + type);
+	}
 }
 
 /**
@@ -239,4 +274,42 @@ std::string art::File::new_name()
 		}
 	}
 	return m_filename;
+}
+
+/**
+ * @brief Get the material object
+ * 
+ * @param name 
+ * @return std::shared_ptr<Material> 
+ */
+std::shared_ptr<art::Material> art::File::material(std::string name)
+{
+	return m_materials[name];
+}
+
+/**
+ * @brief Load material from json into map.
+ * 
+ * @param j 
+ */
+void art::File::load_materials(json &j)
+{
+	auto materials = j.at("scene").at("materials");
+	for( auto material : materials)
+	{
+		auto type = material.at("type");
+		auto name = material.at("name");
+
+		if(type == "flat")
+		{
+			auto diffuse = material.at("diffuse");
+			auto r = diffuse.at("r"); auto g = diffuse.at("g");
+			auto b = diffuse.at("b");
+			m_materials[name] = std::make_shared<FlatMaterial>(r, g, b, name);
+		}
+		else 
+		{
+			throw std::invalid_argument("Invalid syntax. Type not found: " + type);
+		}
+	}
 }

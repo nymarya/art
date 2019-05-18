@@ -4,7 +4,7 @@
 #include "vector3.h"
 #include "camera.h"
 #include "color.h"
-#include "file.h"
+#include "file/file.h"
 #include "json.hpp"
 #include "buffer.h"
 #include "background.h"
@@ -58,15 +58,10 @@ void init_engine()
      std::shared_ptr<Primitive> agg = file.create_primitives(j);
 
      std::shared_ptr<Sampler> sampler(new Sampler());
-     // if (parser.integrator.compare("flat") == 0)
-     // {
-     //      FlatIntegrator *fi = new FlatIntegrator(parser.camera, sampler);
-     //      g_integrator = std::unique_ptr<Integrator>(fi);
-     // }
 
-     g_integrator = file.create_integrator(j, g_camera, sampler);
+     std::shared_ptr<Integrator> g_integrator = file.create_integrator(j, g_camera, sampler);
      // We create the scene last, because we need all the other objects first.
      // create a scene
      Scene scene = Scene(agg, background);
-     g_scene = std::make_unique<Scene>(scene);
+     std::unique_ptr<Scene> g_scene = std::make_unique<Scene>(scene);
 }

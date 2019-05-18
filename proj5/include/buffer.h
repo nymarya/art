@@ -7,7 +7,7 @@
 #include <memory>
 #include <math.h>
 
-#include "vector3.h"
+#include "geometry/vector3.h"
 #include "color.h"
 #include "common.h"
 

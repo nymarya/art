@@ -10,7 +10,7 @@ namespace art
             /**
              * @brief Construct a new Shape object
              */
-            Shape( Material * material );
+            Shape( std::string name, Material * material );
 
             /**
              * @brief Destroy the Shape object

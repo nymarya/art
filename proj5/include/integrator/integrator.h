@@ -2,7 +2,7 @@
 #define _integrator_h_
 
 #include <iostream>
-#include "scene.h"
+#include "../scene.h"
 
 namespace art{
     class Integrator {

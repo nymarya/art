@@ -27,5 +27,5 @@ size_t art::Camera::height()
  */
 std::unique_ptr<art::Buffer> art::Camera::film()
 {
-    return m_film;
+    return std::make_unique<Buffer>(m_film.get());
 }

@@ -2,21 +2,36 @@
 #define _sphere_h_
 
 #include "shape.h"
-#include "../point3d.h"
+#include "../geometry/vector3.h"
+#include "../material/material.h"
 
-namespace art {
+namespace art
+{
     class Sphere : public Shape
     {
-        
         public:
-            Sphere(Point3D center, float radius);
+            Sphere(Vector3 center, float radius, std::string name, Material *material);
             ~Sphere();
-        private:
-            Point3D m_center;
-            float m_radius;
-    };
 
-    
-}
+            /**
+             * @brief Get center of the sphere
+             * 
+             * @return Vector3 
+             */
+            Vector3 center();
+
+            /**
+             * @brief Get radius of the sphere
+             * 
+             * @return float 
+             */
+            float radius();
+
+        private:
+            Vector3 m_center;
+            float m_radius;
+};
+
+} // namespace art
 
 #endif

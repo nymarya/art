@@ -9,7 +9,8 @@ namespace art{
     class GeometricPrimitive : public Primitive
     {
         public:
-            GeometricPrimitive(/* args */);
+            GeometricPrimitive(std::shared_ptr<Shape> shape,
+                         std::shared_ptr<Material> material);
             ~GeometricPrimitive();
 
         private:
