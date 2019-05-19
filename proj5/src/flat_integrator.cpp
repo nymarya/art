@@ -1,27 +1,31 @@
 #include "../include/integrator/flat_integrator.h"
+#include "../include/material/flat_material.h"
 
 /**
  * @Override
  * 
  */
-art::Color art::FlatIntegrator::Li(const Ray& ray, const Scene& scene, const Sampler& sampler) const
+art::Vector3 art::FlatIntegrator::Li(const Ray& ray, const Scene& scene, const Sampler& sampler) const
 {
-    Color L((component_t) 0,0,0); // The radiance
+    Vector3 L((component_t) 0,0,0); // The radiance
     // Find closest ray intersection or return background radiance.
     SurfaceInteraction isect;  
     if (!scene.intersect(ray, &isect)) {
         // This might be just:
-        float _x = float(ray)/float(img_dim.x());
-        float _y = float(ray.y)/float(img_dim.y());
-        L = scene.m_background->color(ray);
+        auto h = camera->film.height();
+        auto w = camera->film.width();
+
+        float x = float(ray.x())/float(w);
+        float y = float(ray.y())/float(h);
+        L = scene.m_background->color(x, y);
     }
     else {
         // Some form of determining the incoming radiance at the ray's origin.
         // For this integrator, it might just be:
         // Polymorphism in action.
-        FlatMaterial *fm = dynamic_cast< FlatMaterial *>( iscet.primitive->get_material() );
+        FlatMaterial *fm = dynamic_cast< FlatMaterial *>( isect.primitive()->get_material() );
         // Assign diffuse color to L.
-        L = fm->kd(); // Call a method present only in FlatMaterial.
+        L = fm->diffuse(); // Call a method present only in FlatMaterial.
     }
     return L;
 }

@@ -34,7 +34,7 @@ namespace art{
          * 
          * @return component_t 
          */
-        component_t x();
+        component_t x( void) const;
 
         /**
          * @brief Set the x axis that generated the ray
@@ -48,7 +48,7 @@ namespace art{
          * 
          * @return component_t 
          */
-        component_t y();
+        component_t y(void) const;
 
         /**
          * @brief Set the y axis that generated the ray

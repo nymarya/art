@@ -15,6 +15,9 @@ namespace art{
             SurfaceInteraction(const Point3D &p,const Vector3&n, const Vector3&wo, float time,
                 const Point3D& uv, const Primitive *pri );
 
+            const Primitive * primitive() const
+            {return m_primitive;}
+
         private:
             Point3D m_p; // Contact point.
             Vector3 m_n; // The surface normal.

@@ -11,7 +11,7 @@ art::Point3 art::Ray::operator() (component_t t) const {
 /**
  * @brief Get the x axis that generated the ray
  */
-component_t art::Ray::x()
+component_t art::Ray::x() const
 {
     return m_x;
 }
@@ -27,7 +27,7 @@ void art::Ray::x(int x)
 /**
  * @brief Get the y axis that generated the ray
  */
-component_t art::Ray::y()
+component_t art::Ray::y() const
 {
     return m_y;
 }
