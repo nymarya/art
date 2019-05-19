@@ -25,7 +25,7 @@ size_t art::Camera::height() const
  /**
  * @brief Get film.
  */
-art::Buffer* art::Camera::film()
+art::Buffer* art::Camera::film() const
 {
     return m_film.get();
 }

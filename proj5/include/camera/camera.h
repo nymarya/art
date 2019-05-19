@@ -40,7 +40,7 @@ namespace art{
         /**
          * @brief Get film.
          */
-        Buffer*  film();
+        Buffer*  film() const;
 
     Vector3 m_position, m_target, m_up;
     private:

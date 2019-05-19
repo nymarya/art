@@ -1,4 +1,4 @@
-#include "../include/point3d.h"
+#include "../include/geometry/point3d.h"
 
 /**
  * @brief Contructor for point object

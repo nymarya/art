@@ -38,6 +38,7 @@ class File
 typedef void (File::*file_methot_t)(size_t width, size_t height, const element_t * data);
 
 public:
+  File(){}
   File(std::string filename);
 
   ~File() = default;
@@ -52,7 +53,7 @@ public:
    */
   std::unique_ptr<Buffer> create_canvas(json &j);
 
-  std::unique_ptr<Background>  create_background(json &j);
+  std::shared_ptr<Background>  create_background(json &j);
 
   /**
    * @brief Create camera object based on the json read.
@@ -109,6 +110,14 @@ public:
    * @param j 
    */
   void load_materials(json &j);
+
+  /**
+   * @brief Set filename to be read
+   * 
+   * @param name 
+   */
+  void name(std::string name)
+  {m_filename = name;}
 
 private:
   std::string m_filename, m_extension;

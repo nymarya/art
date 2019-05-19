@@ -12,8 +12,8 @@ art::Vector3 art::FlatIntegrator::Li(const Ray& ray, const Scene& scene, const S
     SurfaceInteraction isect;  
     if (!scene.intersect(ray, &isect)) {
         // This might be just:
-        auto h = camera->film.height();
-        auto w = camera->film.width();
+        const size_t h = camera->film()->height();
+        auto w = camera->film()->width();
 
         float x = float(ray.x())/float(w);
         float y = float(ray.y())/float(h);

@@ -7,13 +7,13 @@
  * @return true 
  * @return false 
  */
-bool art::AggregatePrimitive::intersect( const Ray& r, SurfaceInteraction *) const
+bool art::AggregatePrimitive::intersect( const Ray& r, SurfaceInteraction * s) const
 {
     bool v;
     // For each primitive aggregate, checks wheter the ray hits the surface
-    for (const auto p : primitives)
+    for (const auto p : m_primitives)
     {
-        v = p->intersect(r, surface);
+        v = p->intersect(r, s);
         if (v)
             return true;
     }
@@ -27,7 +27,7 @@ bool art::AggregatePrimitive::intersect( const Ray& r, SurfaceInteraction *) con
 bool art::AggregatePrimitive::intersect_p( const Ray& r ) const
 {
     bool v;
-    for (const auto p : primitives)
+    for (const auto p : m_primitives)
     {
         v = p->intersect_p(r);
         if (v)

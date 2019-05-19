@@ -1,7 +1,7 @@
 #ifndef _point2d_h_
 #define _point2d_h_
 
-#include "common.h"
+#include "../common.h"
 
 namespace art
 {

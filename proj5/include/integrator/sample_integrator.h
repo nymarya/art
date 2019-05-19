@@ -12,7 +12,7 @@ namespace art{
     //=== Public interface
     public:
         ~SampleIntegrator();
-        SampleIntegrator( std::shared_ptr<const Camera> cam,
+        SampleIntegrator( std::shared_ptr< Camera> cam,
                           std::shared_ptr<Sampler> sampler)
             : camera{cam}, sampler{sampler}{};
 
@@ -25,7 +25,7 @@ namespace art{
         void preprocess( const Scene& scene ){}
 
     protected:
-        std::shared_ptr<const Camera> camera;
+        std::shared_ptr< Camera> camera;
     private:
         std::shared_ptr<Sampler> sampler;
 };

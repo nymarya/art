@@ -119,7 +119,7 @@ void art::File::save_png(const size_t width, const size_t height, const element_
 /**
  * @brief Instantiate object
  */
-std::unique_ptr<art::Background> art::File::create_background(json &j)
+std::shared_ptr<art::Background> art::File::create_background(json &j)
 {
 	auto scene = j.at("scene").at("background");
 	std::string name = scene.at("type");

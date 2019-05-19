@@ -1,4 +1,4 @@
-#include "../include/vector3.h"
+#include "../include/geometry/vector3.h"
 
 art::Vector3::Vector3(component_t component1, component_t component2, component_t component3)
 {

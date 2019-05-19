@@ -3,11 +3,13 @@
 
 #include <memory>
 
+#include "../includes.h"
 #include "../ray.h"
 #include "../material/material.h"
-#include "../includes.h"
 
 namespace art{
+
+    class SurfaceInteraction;
 
     class Primitive {
         public:

@@ -2,8 +2,8 @@
 #define _geometric_primitive_h_
 
 #include <memory>
-#include "../shape/shape.h"
 #include "primitive.h"
+#include "../shape/shape.h"
 
 namespace art{
     class GeometricPrimitive : public Primitive

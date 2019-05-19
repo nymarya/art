@@ -1,4 +1,4 @@
-#include "integrator/sample_integrator.h"
+#include "../include/integrator/sample_integrator.h"
 
 
 void art::SampleIntegrator::render(const Scene& scene) {
@@ -7,17 +7,15 @@ void art::SampleIntegrator::render(const Scene& scene) {
     preprocess(scene);
 
     // This might just be a tile (part) of an image, rendered in parallel.
-    auto h = camera->height;
-    auto w = camera->width;
+    auto h = camera->film()->height();
+    auto w = camera->film()->width();
     for ( int y = 0 ; y < h ; y++ ) {
         for( int x = 0 ; x < w ; x++ ) {
-            Point2D screen_coord{ float(x)/float(w), float(y)/float(h) };
-            Ray ray = camera->generate_ray( (component_t) float(x)/float(w), 
-                                            (component_t) float(y)/float(h) ); // Generate the ray from (x,y)
-            Color L = Li( ray, scene, sampler.get() ); // Determine the color for the ray.
-            camera->film->add_sample( Point2D( x, y ), L ); // Set color of pixel (x,y) to L.
+            int _x = x/ w;
+            int _y = y/ h;
+            Ray ray = camera->generate_ray( _x , _y ); // Generate the ray from (x,y)
+            Vector3 L = Li( ray, scene, *sampler.get() ); // Determine the color for the ray.
+            camera->film()->pixel( x, y , L ); // Set color of pixel (x,y) to L.
         }
-    }
-    // Send image color buffer to the output file.
-    file.save(w, h, camera->film->pixels());   
+    }  
 }
