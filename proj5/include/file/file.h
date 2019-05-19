@@ -63,7 +63,7 @@ public:
    * @brief Create primitive object based on the objects of
    * the scene, which are defined at the json file.
    */
-  std::unique_ptr<Primitive> create_primitives(json &j);
+  std::shared_ptr<Primitive> create_primitives(json &j);
 
   /**
    * @brief Create a integrator object

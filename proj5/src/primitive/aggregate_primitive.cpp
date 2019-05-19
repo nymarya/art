@@ -1,13 +1,16 @@
 #include "../../include/primitive/aggregate_primitive.h"
 
 /**
- * @brief 
+ * @brief Check if ray intersect with surface of any shape.
+ * 
+ * @param r 
+ * @return true 
+ * @return false 
  */
-bool art::AggregatePrimitive::intersect(const Ray &r,
-               SurfaceInteraction *surface)
-    const
+bool art::AggregatePrimitive::intersect( const Ray& r, SurfaceInteraction *) const
 {
     bool v;
+    // For each primitive aggregate, checks wheter the ray hits the surface
     for (const auto p : primitives)
     {
         v = p->intersect(r, surface);
@@ -18,10 +21,10 @@ bool art::AggregatePrimitive::intersect(const Ray &r,
 }
 
 /**
- * @brief 
- *  
+ * @brief Simpler & faster version of intersection that only return true/false.
+ * It does not compute the hit point information.
  */
-bool intersect_p(const Ray &r) const
+bool art::AggregatePrimitive::intersect_p( const Ray& r ) const
 {
     bool v;
     for (const auto p : primitives)

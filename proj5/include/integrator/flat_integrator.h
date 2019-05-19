@@ -1,10 +1,10 @@
 #ifndef _fi_h_
 #define _fi_h_
 
-#include "ray.h"
+#include "../ray.h"
 #include "sample_integrator.h"
 #include "sampler.h"
-#include "scene.h"
+#include "../scene.h"
 
 namespace art{
 

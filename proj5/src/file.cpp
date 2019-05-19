@@ -193,7 +193,7 @@ std::unique_ptr<art::Camera> art::File::create_camera(json &j)
  * @brief Create primitive object based on the objects of
  * the scene, which are defined at the json file.
  */
-std::unique_ptr<art::Primitive> art::File::create_primitives(json &j)
+std::shared_ptr<art::Primitive> art::File::create_primitives(json &j)
 {
 
 	auto objects = j.at("scene").at("objects");
@@ -203,8 +203,9 @@ std::unique_ptr<art::Primitive> art::File::create_primitives(json &j)
 	{
 		std::string type = object.at("type");
 		std::string name = object.at("name");
-		auto material = object.at("material");
+		std::string material_key = object.at("material");
 		//TODO: consultar map de material 
+		std::shared_ptr<Material> material = m_materials[material_key];
 
 		if (type == "sphere")
 		{
@@ -213,9 +214,9 @@ std::unique_ptr<art::Primitive> art::File::create_primitives(json &j)
 			Vector3 center = Vector3(v_center.at("x"), v_center.at("y"),
 									 v_center.at("z"));
 			//Create shape and primitive
-			std::unique_ptr<Sphere> shape = std::make_unique<art::Sphere>(center, 
-											radius, name, material);
-			return std::make_unique<art::GeometricPrimitive>(shape, material);
+			std::shared_ptr<Sphere> shape = std::make_shared<art::Sphere>(center, 
+											radius, name, material.get());
+			return std::make_shared<art::GeometricPrimitive>(shape, material);
 		}
 		else
 		{

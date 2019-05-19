@@ -21,7 +21,7 @@ namespace art{
         /**
          * @brief Override operator () 
          */
-        Point3 operator()(component_t t);
+        Point3 operator()(component_t t) const;
 
         /**
         friend std::ostream& operator<< (std::ostream &os, const Ray &t){
@@ -29,9 +29,39 @@ namespace art{
             return os;
         }**/
 
+        /**
+         * @brief Get the x axis that generated the ray
+         * 
+         * @return component_t 
+         */
+        component_t x();
+
+        /**
+         * @brief Set the x axis that generated the ray
+         * 
+         * @return component_t 
+         */
+        void x(int x);
+
+        /**
+         * @brief Get the y axis that generated the ray
+         * 
+         * @return component_t 
+         */
+        component_t y();
+
+        /**
+         * @brief Set the y axis that generated the ray
+         * 
+         * @return component_t 
+         */
+        void y( int y );
+
     private:
         Point3 m_o; //!< origin
         Vector3 m_d; //!< direction
+
+        int m_x, m_y;
 
     };
 
