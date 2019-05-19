@@ -30,12 +30,12 @@ namespace art{
         /**
          * @brief Get width.
          */
-        size_t width();
+        size_t width() const;
 
         /**
          * @brief Get height.
          */
-        size_t height();
+        size_t height() const;
 
         /**
          * @brief Get film.

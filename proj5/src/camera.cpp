@@ -9,7 +9,7 @@ m_target(target), m_up(up)
  /**
  * @brief Get width.
  */
-size_t art::Camera::width()
+size_t art::Camera::width() const
 {
     return m_width;
 }
@@ -17,7 +17,7 @@ size_t art::Camera::width()
 /**
  * @brief Get height.
  */
-size_t art::Camera::height()
+size_t art::Camera::height() const
 {
     return m_height;
 }

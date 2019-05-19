@@ -20,8 +20,8 @@ namespace art{
         /**
          * The main loop that traverse the pixels and
          * creates an image. */
-        virtual void render( const Scene& scene );
-        virtual void preprocess( const Scene& scene );
+        void render( const Scene& scene );
+        void preprocess( const Scene& scene ){}
 
     protected:
         std::shared_ptr<const Camera> camera;

@@ -13,32 +13,8 @@
 
 using namespace art;
 
-int main()
-{
-
-     std::vector<std::shared_ptr<Primitive>> scene;
-
-     auto h = c->height();
-     auto w = c->width();
-     for (auto i = 0; i < h; i++)
-     {
-          for (auto j = 0u; j < w; j++)
-          {
-               Point3 screen_coord(float(i) / float(w), float(j) / float(h), 0);
-               // Generate ray with the Shirley method.
-               Ray ray = cam->generate_ray(j, i);
-               auto color = background->color(float(j) / float(w), float(i) / float(h)); // get background color.
-               for (const std::shared_ptr<art::Primitive> &p : scene)
-               {                                         // Traverse each object.
-                    if (p->intersect_p(ray))             // Does the ray hit any sphere in the scene?
-                         color = Vector3(255, 255, 255); // Just paint it red.
-                    c->pixel((h - 1) * i, j, color);     // set image buffer at position (i,j), accordingly.
-               }
-          }
-     }
-
-     file.save(w, h, c->pixels());
-}
+std::shared_ptr<Integrator> g_integrator;
+std::unique_ptr<Scene> g_scene;
 
 void init_engine()
 {
@@ -59,10 +35,24 @@ void init_engine()
 
      std::shared_ptr<Sampler> sampler(new Sampler());
 
-     std::shared_ptr<Integrator> g_integrator = file.create_integrator(j, g_camera, sampler);
+     g_integrator = file.create_integrator(j, g_camera, sampler);
      // We create the scene last, because we need all the other objects first.
      // create a scene
      
      Scene scene = Scene(agg, std::make_shared<Background>(background.get()));
-     std::unique_ptr<Scene> g_scene = std::make_unique<Scene>(scene);
+     g_scene = std::make_unique<Scene>(scene);
+}
+
+void run()
+{
+    g_integrator->render( *g_scene ); // Activate the main loop
+}
+
+int main()
+{
+     init_engine();
+
+     run();
+
+     return EXIT_SUCCESS;
 }

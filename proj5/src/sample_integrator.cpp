@@ -18,5 +18,5 @@ void art::SampleIntegrator::render(const Scene& scene) {
         }
     }
     // Send image color buffer to the output file.
-    
+    file.save(w, h, camera->film->pixels());   
 }
