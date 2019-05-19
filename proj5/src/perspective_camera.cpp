@@ -1,4 +1,4 @@
- #include "../include/perspective_camera.h"
+ #include "../include/camera/perspective_camera.h"
  
 art::PerspectiveCamera::PerspectiveCamera(const size_t width, const size_t height,
 Vector3 position, Vector3 target, Vector3 up, component_t fovy, component_t aspect,

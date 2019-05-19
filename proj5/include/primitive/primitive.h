@@ -1,6 +1,8 @@
 #ifndef _primitive_h_
 #define _primitive_h_
 
+#include <memory>
+
 #include "../ray.h"
 #include "../material/material.h"
 #include "../includes.h"

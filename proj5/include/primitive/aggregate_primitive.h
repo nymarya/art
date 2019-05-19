@@ -10,7 +10,7 @@ namespace art{
      * @brief Class that aggregates multiple primitives
      * in order to facilitate the processing.
      */
-    class AggregatePrimitive
+    class AggregatePrimitive : public Primitive
     { 
         public:
             /**

@@ -1,9 +1,8 @@
 #include "../../include/shape/sphere.h"
 
 art::Sphere::Sphere(art::Vector3 center, float radius, std::string name, art::Material *material)
-:m_center (center), m_radius(radius), Shape(name, material)
+    : m_center(center), m_radius(radius), Shape(name, material)
 {
-
 }
 
 /**
@@ -24,4 +23,24 @@ art::Vector3 art::Sphere::center()
 float art::Sphere::radius()
 {
     return m_radius;
+}
+
+/**
+ * @Override 
+ */
+bool art::Sphere::intersect(const art::Ray &r,
+               art::SurfaceInteraction *surface) const
+{
+    //stub 
+    return true;
+}
+
+/**
+ * @brief  check if a ray intersect a primitive
+ * @Override
+ */
+bool art::Sphere::intersect_p(const art::Ray &r) const
+{
+    //stub
+    return true;
 }

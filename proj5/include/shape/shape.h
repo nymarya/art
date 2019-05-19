@@ -1,6 +1,9 @@
 #ifndef _shape_h_
 #define _shape_h_
 
+#include "../ray.h"
+#include "../surface_interaction.h"
+
 namespace art
 {
 
@@ -10,7 +13,8 @@ namespace art
             /**
              * @brief Construct a new Shape object
              */
-            Shape( std::string name, Material * material );
+            Shape( std::string name, Material * material )
+            :m_name(name), m_material(material){}
 
             /**
              * @brief Destroy the Shape object
@@ -42,7 +46,8 @@ namespace art
              * @brief Set the name of the shape
              * @param name.
              */
-            void set_name ( std::string name );
+            void set_name ( std::string name )
+            {m_name = name;}
 
         protected:
             std::string m_name;

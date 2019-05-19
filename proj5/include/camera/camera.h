@@ -40,7 +40,7 @@ namespace art{
         /**
          * @brief Get film.
          */
-        std::unique_ptr<Buffer>  film();
+        Buffer*  film();
 
     Vector3 m_position, m_target, m_up;
     private:

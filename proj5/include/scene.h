@@ -7,7 +7,7 @@
 
 #include "background.h"
 //#include "light.h"
-#include "primitive.h"
+#include "primitive/primitive.h"
 #include "ray.h"
 #include "surface_interaction.h"
 

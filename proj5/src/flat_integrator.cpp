@@ -1,10 +1,10 @@
-#include "integrator/flat_integrator.h"
+#include "../integrator/flat_integrator.h"
 
 /**
  * @Override
  * 
  */
-art::Color art::FlatIntegrator::Li(const Ray& ray, const Scene& scene, Sampler& sampler)
+art::Color art::FlatIntegrator::Li(const Ray& ray, const Scene& scene, const Sampler& sampler)
 {
     Color L((component_t) 0,0,0); // The radiance
     // Find closest ray intersection or return background radiance.

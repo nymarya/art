@@ -3,7 +3,7 @@
 
 #include "camera/camera.h"
 #include "integrator.h"
-#include "../point2d.h"
+#include "../geometry/point2d.h"
 #include "../sampler.h"
 
 namespace art{
@@ -16,7 +16,7 @@ namespace art{
             : camera{cam}, sampler{sampler}{};
 
         virtual Color Li( const Ray& ray, const Scene& scene,
-                Sampler& sampler ) const = 0;
+                const Sampler& sampler ) const = 0;
         /**
          * The main loop that traverse the pixels and
          * creates an image. */

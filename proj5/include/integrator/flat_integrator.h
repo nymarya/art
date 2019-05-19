@@ -16,7 +16,7 @@ namespace art{
             FlatIntegrator(std::shared_ptr<Camera> camera, std::shared_ptr<art::Sampler> sampler);
             ~FlatIntegrator();
 
-            Color Li( const Ray& ray, const Scene& scene, Sampler& sampler ) const;
+            Color Li( const Ray& ray, const Scene& scene, const Sampler& sampler ) const;
 
     };
     

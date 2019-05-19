@@ -2,8 +2,8 @@
 #define _si_h_
 
 #include "common.h"
-#include "point3d.h"
-#include "vector3.h"
+#include "geometry/point3d.h"
+#include "geometry/vector3.h"
 #include "includes.h"
 
 namespace art{

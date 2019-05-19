@@ -27,6 +27,27 @@ namespace art
              */
             float radius();
 
+            /**
+             * @brief   check if a ray intersect a primitive
+             * 
+             * @param r        the ray
+             * @param surface  the surface of primitive
+             * @return true    if the ray intersect the sphere
+             * @return false   if the ray not intersect the sphere
+             */
+            bool intersect ( const Ray& r,
+                                    SurfaceInteraction * surface)
+                                    const;
+        
+            /**
+             * @brief  check if a ray intersect a primitive
+             * 
+             * @param r        the ray 
+             * @return true    if the ray intersect the sphere 
+             * @return false   if the ray not intersect the sphere
+             */
+            bool intersect_p( const Ray& r ) const;
+
         private:
             Vector3 m_center;
             float m_radius;

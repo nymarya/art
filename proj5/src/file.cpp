@@ -201,8 +201,8 @@ std::unique_ptr<art::Primitive> art::File::create_primitives(json &j)
 	// Create shapes
 	for (auto object : objects)
 	{
-		auto type = object.at("type");
-		auto name = object.at("name");
+		std::string type = object.at("type");
+		std::string name = object.at("name");
 		auto material = object.at("material");
 		//TODO: consultar map de material 
 
@@ -213,7 +213,7 @@ std::unique_ptr<art::Primitive> art::File::create_primitives(json &j)
 			Vector3 center = Vector3(v_center.at("x"), v_center.at("y"),
 									 v_center.at("z"));
 			//Create shape and primitive
-			std::unique_ptr<Shape> shape = std::make_unique<art::Shape>(center, 
+			std::unique_ptr<Sphere> shape = std::make_unique<art::Sphere>(center, 
 											radius, name, material);
 			return std::make_unique<art::GeometricPrimitive>(shape, material);
 		}
@@ -231,7 +231,7 @@ std::unique_ptr<art::Integrator> art::File::create_integrator(json &j, std::shar
 														std::shared_ptr<art::Sampler> sampler)
 {
 	auto integrator = j.at("running").at("integrator");
-	auto type = integrator.at("type");
+	std::string type = integrator.at("type");
 	if (type == "flat")
 	{
 	     return std::make_unique<FlatIntegrator>(camera, sampler);
@@ -297,8 +297,8 @@ void art::File::load_materials(json &j)
 	auto materials = j.at("scene").at("materials");
 	for( auto material : materials)
 	{
-		auto type = material.at("type");
-		auto name = material.at("name");
+		std::string type = material.at("type");
+		std::string name = material.at("name");
 
 		if(type == "flat")
 		{
