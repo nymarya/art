@@ -18,7 +18,7 @@ namespace art{
              * a list of primitives.
              */ 
             AggregatePrimitive(std::vector<std::shared_ptr<Primitive>> primitives);
-            ~AggregatePrimitive();
+            ~AggregatePrimitive() = default;
 
             /**
              * @brief Check if ray intersect with surface of any shape.

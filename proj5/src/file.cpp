@@ -15,10 +15,12 @@ art::File::File(std::string filename)
 json art::File::read()
 {
 	// read a JSON file
+	std::cout << m_filename << "\n";
 	std::ifstream input(m_filename);
 	json j;
 	input >> j;
 
+	std::cout << "read1\n";
 	try
 	{
 		m_filename = j.at("filename");
@@ -49,12 +51,9 @@ json art::File::read()
 std::unique_ptr<art::Buffer> art::File::create_canvas(json &j)
 {
 
-	// Get scene
-	auto scene = j.at("scene");
-
 	//Get canvas' data
-	auto h = scene.at("camera").at("height");
-	auto w = scene.at("camera").at("width");
+	auto h = j.at("camera").at("height");
+	auto w = j.at("camera").at("width");
 
 	return std::make_unique<Buffer>(w, h);
 }
@@ -197,15 +196,23 @@ std::shared_ptr<art::Primitive> art::File::create_primitives(json &j)
 {
 
 	auto objects = j.at("scene").at("objects");
+	std::cout << "primitive1\n";
+
+	std::vector<std::shared_ptr<Primitive>> primitives;
+	std::cout << "primitive2\n";
 
 	// Create shapes
 	for (auto object : objects)
 	{
 		std::string type = object.at("type");
+		std::cout << "primitive3\n";
 		std::string name = object.at("name");
+		std::cout << "primitive4\n";
 		std::string material_key = object.at("material");
-		//TODO: consultar map de material 
+		std::cout << "primitive5\n";
+		
 		std::shared_ptr<Material> material = m_materials[material_key];
+		std::cout << "primitive6\n";
 
 		if (type == "sphere")
 		{
@@ -213,16 +220,23 @@ std::shared_ptr<art::Primitive> art::File::create_primitives(json &j)
 			auto v_center = object.at("center");
 			Vector3 center = Vector3(v_center.at("x"), v_center.at("y"),
 									 v_center.at("z"));
+			std::cout << "primitive7\n";
 			//Create shape and primitive
 			std::shared_ptr<Sphere> shape = std::make_shared<art::Sphere>(center, 
 											radius, name, material.get());
-			return std::make_shared<art::GeometricPrimitive>(shape, material);
+			std::cout << "primitive8\n";
+			primitives.push_back(std::make_shared<art::GeometricPrimitive>(shape, material));
+			std::cout << "primitive9\n";
 		}
 		else
 		{
 			throw std::invalid_argument("Invalid syntax. Type not found: " + type);
 		}
 	}
+
+	auto aa = std::make_shared<AggregatePrimitive>(primitives);
+	std::cout << "primitive10\n";
+	return aa;
 }
 
 /**

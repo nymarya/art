@@ -29,3 +29,5 @@ art::Buffer* art::Camera::film() const
 {
     return m_film.get();
 }
+
+//TODO set camera

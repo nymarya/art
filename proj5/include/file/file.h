@@ -15,6 +15,7 @@
 #include "../integrator/integrator.h"
 #include "../integrator/flat_integrator.h"
 #include "../material/flat_material.h"
+#include "../primitive/aggregate_primitive.h"
 #include "../primitive/geometric_primitive.h"
 #include "../shape/shape.h"
 #include "../shape/sphere.h"

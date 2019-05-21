@@ -1,6 +1,17 @@
 #include "../../include/primitive/aggregate_primitive.h"
 
 /**
+ * @brief Instatiate the new aggregate of primitive based on
+ * a list of primitives.
+ */ 
+art::AggregatePrimitive::AggregatePrimitive(std::vector<std::shared_ptr<Primitive>> primitives)
+:m_primitives(primitives), Primitive(*primitives.front().get())
+{
+    std::cout << "primitive13\n";
+    /*empty*/
+}
+
+/**
  * @brief Check if ray intersect with surface of any shape.
  * 
  * @param r 

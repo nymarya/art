@@ -32,8 +32,11 @@ namespace art{
              */
             bool intersect_p( const Ray& r ) const;
 
+            Material * get_material(void) const {return m_material.get();}
+
         private:
             std::shared_ptr<Shape> m_shape;
+            std::shared_ptr<Material> m_material;
     };
     
 }
