@@ -5,6 +5,7 @@
 #include "sample_integrator.h"
 #include "sampler.h"
 #include "../scene.h"
+#include "../surface_interaction.h"
 
 namespace art{
 
@@ -13,8 +14,10 @@ namespace art{
     private:
         /* data */
         public:
-            FlatIntegrator(std::shared_ptr<Camera> camera, std::shared_ptr<art::Sampler> sampler);
-            ~FlatIntegrator();
+            FlatIntegrator(std::shared_ptr<Camera> camera, std::shared_ptr<art::Sampler> sampler)
+            :SampleIntegrator(camera, sampler){}
+
+            ~FlatIntegrator() = default;
 
             Vector3 Li( const Ray& ray, const Scene& scene, const Sampler& sampler ) const;
 

@@ -11,7 +11,7 @@ namespace art{
         public:
             GeometricPrimitive(std::shared_ptr<Shape> shape,
                          std::shared_ptr<Material> material);
-            ~GeometricPrimitive();
+            ~GeometricPrimitive() = default;
 
             /**
              * @brief Check if ray intersetc with surface of the shape.

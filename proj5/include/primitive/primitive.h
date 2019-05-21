@@ -16,7 +16,7 @@ namespace art{
             Primitive(std::shared_ptr<Material> material)
             :m_material(material){}
 
-            virtual ~Primitive();
+            virtual ~Primitive() {};
             virtual bool intersect( const Ray& r, SurfaceInteraction *) const = 0;
             // Simpler & faster version of intersection that only return true/false.
             // It does not compute the hit point information.

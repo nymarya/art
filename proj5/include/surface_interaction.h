@@ -11,9 +11,12 @@ namespace art{
     
     class SurfaceInteraction {
         public:
-            SurfaceInteraction();
+            SurfaceInteraction(){}
             SurfaceInteraction(const Point3D &p,const Vector3&n, const Vector3&wo, float time,
-                const Point3D& uv, const Primitive *pri );
+                const Point3D& uv, const Primitive *pri )
+                :m_p{p}, m_n{n}, m_wo{wo}, m_time{time}, m_uv{uv}, m_primitive{pri}
+                {}
+
 
             const Primitive * primitive() const
             {return m_primitive;}

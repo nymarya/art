@@ -11,7 +11,7 @@ namespace art
     {
         public:
             Sphere(Vector3 center, float radius, std::string name, Material *material);
-            ~Sphere();
+            ~Sphere() = default;
 
             /**
              * @brief Get center of the sphere

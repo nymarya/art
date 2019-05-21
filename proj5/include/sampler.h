@@ -8,8 +8,8 @@ namespace art
         private:
             /* data */
         public:
-            Sampler(/* args */);
-            ~Sampler();
+            Sampler(/* args */){};
+            ~Sampler() = default;
     };
 
 } // namespace art

@@ -8,7 +8,7 @@ namespace art{
             Material(std::string name)
             :m_name(name){}
 
-            virtual ~Material() = 0;
+            virtual ~Material() {}
 
             /**
              * @brief 

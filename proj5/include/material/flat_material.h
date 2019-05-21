@@ -12,7 +12,7 @@ namespace art
     {
         public:
             FlatMaterial(component_t r, component_t g, component_t b, std::string name);
-            ~FlatMaterial();
+            ~FlatMaterial() = default;
 
             /**
              * @brief Get diffuse material/color.

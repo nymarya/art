@@ -1,5 +1,10 @@
 #include "../../include/primitive/geometric_primitive.h"
 
+art::GeometricPrimitive::GeometricPrimitive(std::shared_ptr<Shape> shape,
+                         std::shared_ptr<Material> material)
+:m_shape{shape}, Primitive(material)
+{}
+
 /**
  * @brief Check if ray intersetc with surface of the shape.
  */

@@ -11,7 +11,7 @@ namespace art{
     class SampleIntegrator : public Integrator {
     //=== Public interface
     public:
-        ~SampleIntegrator();
+        ~SampleIntegrator() = default;
         SampleIntegrator( std::shared_ptr< Camera> cam,
                           std::shared_ptr<Sampler> sampler)
             : camera{cam}, sampler{sampler}{};
