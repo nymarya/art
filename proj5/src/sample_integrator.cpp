@@ -13,10 +13,13 @@ void art::SampleIntegrator::render(const Scene& scene) {
     std::cout << "render2\n";
     for ( int y = 0 ; y < h ; y++ ) {
         for( int x = 0 ; x < w ; x++ ) {
+            std::cout << "x " << x << " y " << y << "\n";
             int _x = x/ w;
             int _y = y/ h;
             Ray ray = camera->generate_ray( _x , _y ); // Generate the ray from (x,y)
+            std::cout << ray << std::endl;
             Vector3 L = Li( ray, scene, *sampler.get() ); // Determine the color for the ray.
+            std::cout << "li end \n";
             camera->film()->pixel( x, y , L ); // Set color of pixel (x,y) to L.
         }
     }

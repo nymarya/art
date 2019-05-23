@@ -23,11 +23,11 @@ namespace art{
          */
         Point3 operator()(component_t t);
 
-        /**
+        
         friend std::ostream& operator<< (std::ostream &os, const Ray &t){
             os << "[o=" << t.m_o <<", d=" << t.m_d << "]";
             return os;
-        }**/
+        }
 
         /**
          * @brief Get the x axis that generated the ray
@@ -56,6 +56,11 @@ namespace art{
          * @return component_t 
          */
         void y( int y );
+
+        Point3 o() const 
+        { return m_o;} 
+
+        Vector3 d() const {return m_d;}
 
     private:
         Point3 m_o; //!< origin

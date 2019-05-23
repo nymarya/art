@@ -30,4 +30,10 @@ art::Buffer* art::Camera::film() const
     return m_film.get();
 }
 
-//TODO set camera
+/**
+ * @brief Set film of camera
+ */
+void art::Camera::film(std::shared_ptr<Buffer> b)
+{
+    m_film = b;
+}

@@ -42,10 +42,15 @@ namespace art{
          */
         Buffer*  film() const;
 
+        /**
+         * @brief Set film of camera
+         */
+        void film (std::shared_ptr<Buffer> b);
+
     Vector3 m_position, m_target, m_up;
     private:
         size_t m_width, m_height;
-        std::unique_ptr<Buffer> m_film;
+        std::shared_ptr<Buffer> m_film;
         
     };
     

@@ -48,14 +48,14 @@ json art::File::read()
 /**
  * @brief Read json and save figures to canvas
  */
-std::unique_ptr<art::Buffer> art::File::create_canvas(json &j)
+std::shared_ptr<art::Buffer> art::File::create_canvas(json &j)
 {
 
 	//Get canvas' data
 	auto h = j.at("camera").at("height");
 	auto w = j.at("camera").at("width");
 
-	return std::make_unique<Buffer>(w, h);
+	return std::make_shared<Buffer>(w, h);
 }
 
 /**

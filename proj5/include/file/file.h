@@ -52,7 +52,7 @@ public:
   /**
    * @brief Create a canvas object based on the json read.
    */
-  std::unique_ptr<Buffer> create_canvas(json &j);
+  std::shared_ptr<Buffer> create_canvas(json &j);
 
   std::shared_ptr<Background>  create_background(json &j);
 

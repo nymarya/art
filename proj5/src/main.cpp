@@ -32,10 +32,11 @@ void init_engine(std::string filename)
      std::shared_ptr<Background> background = file->create_background(j);
      std::cout << "init2\n";
      // Load Film info.
-     std::unique_ptr<Buffer> c = file->create_canvas(j);
+     std::shared_ptr<Buffer> c = file->create_canvas(j);
      std::cout << "init3\n";
      // Load Camera info and creates the global camera object.
      std::shared_ptr<Camera> g_camera = file->create_camera(j);
+     g_camera->film(c);
      std::cout << "init4\n";
 
      // Load all materials and create a aggregate primitive
