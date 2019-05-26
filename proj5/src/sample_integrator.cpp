@@ -14,8 +14,8 @@ void art::SampleIntegrator::render(const Scene& scene) {
     for ( int y = 0 ; y < h ; y++ ) {
         for( int x = 0 ; x < w ; x++ ) {
             std::cout << "x " << x << " y " << y << "\n";
-            int _x = x/ w;
-            int _y = y/ h;
+            float _x = x/ (float)w;
+            float _y = y/ (float)h;
             Ray ray = camera->generate_ray( _x , _y ); // Generate the ray from (x,y)
             std::cout << ray << std::endl;
             Vector3 L = Li( ray, scene, *sampler.get() ); // Determine the color for the ray.

@@ -244,8 +244,10 @@ art::Vector3 art::Vector3::cross(const art::Vector3 &v2)
 art::Vector3 art::Vector3::normalize()
 {
     auto v1 = m_components;
-    auto element1 = v1[0] == 0 ? 0 : v1[0] /v1[0];
-    auto element2 = v1[1] == 0 ? 0 : v1[1] /v1[1];
-    auto element3 = v1[2] == 0 ? 0 : v1[2] /v1[2];
-    return art::Vector3(element1, element2, element3);
+    auto element1 = v1[0]*v1[0];
+    auto element2 = v1[1]*v1[1];
+    auto element3 = v1[2]*v1[2];
+    auto length = std::sqrt(element1 + element2 + element3 );
+    std::cout << v1[0] << std::endl;
+    return art::Vector3(v1[0] / length,v1[1] / length, v1[2] /length);
 }

@@ -4,6 +4,7 @@
 #include <memory>
 #include "primitive.h"
 #include "../shape/shape.h"
+#include "../material/material.h"
 
 namespace art{
     class GeometricPrimitive : public Primitive
@@ -32,7 +33,9 @@ namespace art{
              */
             bool intersect_p( const Ray& r ) const;
 
-            Material * get_material(void) const {return m_material.get();}
+            Material * get_material(void) const override{
+                std::cout << "material certo\n";
+                return m_material.get();}
 
         private:
             std::shared_ptr<Shape> m_shape;

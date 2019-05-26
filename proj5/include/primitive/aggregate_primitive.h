@@ -39,6 +39,10 @@ namespace art{
              */
             bool intersect_p( const Ray& r ) const;
 
+            Material * get_material(void) const {
+                std::cout << "n era p chegar aq\n";
+                return nullptr; } 
+
         private:
             // List of primitives
             std::vector<std::shared_ptr<Primitive>> m_primitives;

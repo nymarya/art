@@ -5,7 +5,7 @@
  * a list of primitives.
  */ 
 art::AggregatePrimitive::AggregatePrimitive(std::vector<std::shared_ptr<Primitive>> primitives)
-:m_primitives(primitives), Primitive(*primitives.front().get())
+:m_primitives(primitives)
 {
     /*empty*/
 }

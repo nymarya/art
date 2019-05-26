@@ -2,8 +2,16 @@
 
 art::GeometricPrimitive::GeometricPrimitive(std::shared_ptr<Shape> shape,
                          std::shared_ptr<Material> material)
-:m_shape{shape}, Primitive(material)
-{}
+:m_shape{shape}, m_material(material)
+{
+    if(material.get() == nullptr)
+     std::cout << "geo material ugh\n";
+    else
+    {
+        std::cout<< "geo material ok\n";
+    }
+    
+}
 
 /**
  * @brief Check if ray intersetc with surface of the shape.

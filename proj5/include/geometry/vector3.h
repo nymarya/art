@@ -3,6 +3,8 @@
 
 #include "../common.h"
 
+#include <math.h>
+
 using component_t = float;
 
 namespace art{

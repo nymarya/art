@@ -30,6 +30,9 @@ art::Vector3 art::FlatIntegrator::Li(const Ray& ray, const Scene& scene, const S
         std::cout << "Li 5\n";
         if ( isect.primitive() != nullptr) 
             std::cout << "Li 6.5\n";
+        Material * m = isect.primitive()->get_material();
+        if(m != nullptr)
+            std::cout << "material ok\n";
         FlatMaterial *fm = dynamic_cast< FlatMaterial *>( isect.primitive()->get_material() );
         std::cout << "Li 6\n";
 
