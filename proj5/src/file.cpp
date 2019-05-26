@@ -63,16 +63,16 @@ std::shared_ptr<art::Buffer> art::File::create_canvas(json &j)
  */
 void art::File::save(size_t width, size_t height, const element_t *data)
 {
+	std::cout << "before save0\n";
 	file_methot_t save_method = funcMap[m_extension];
+	std::cout << "save0.5\n";
 	(this->*save_method)(width, height, data);
 }
 
 void art::File::save_ppm(size_t width, size_t height, const element_t *data)
 {
 
-	//element_t *image = c.pixels();
-	//size_t width = c.width();
-	//size_t height = c.height();
+	std::cout << "save1\n";
 
 	std::ofstream file;
 

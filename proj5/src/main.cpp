@@ -35,7 +35,7 @@ void init_engine(std::string filename)
      std::shared_ptr<Buffer> c = file->create_canvas(j);
      std::cout << "init3\n";
      // Load Camera info and creates the global camera object.
-     std::shared_ptr<Camera> g_camera = file->create_camera(j);
+     g_camera = file->create_camera(j);
      g_camera->film(c);
      std::cout << "init4\n";
 
@@ -82,11 +82,14 @@ int main(int argc, char *argv[])
      init_engine(filename);
 
      run();
+     std::cout << "runned \n";
 
      auto w = g_camera->film()->width();
      auto h = g_camera->film()->height();
+     std::cout << "before save\n";
      // Send image color buffer to the output file.
      file->save(w, h, g_camera->film()->pixels());
+     std::cout << "saved\n";
 
      return EXIT_SUCCESS;
 }

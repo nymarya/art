@@ -1,17 +1,14 @@
 {
     "camera":{
-        "width": 40,
-        "height": 30,
-        "type": "orthographic",
-        "position":  [0, 0, 0], 
+        "width": 800,
+        "height": 600,
+        "type": "perspective",
+        "position":  [0, 0, 2], 
         "target": [0,0,-10], 
         "up": [0,1,1],
-        "vpdim": {
-            "l":-3, 
-            "r": 3, 
-            "b":-2.25, 
-            "t":2.25
-        } 
+        "fovy": 65.0,
+        "aspect": 1.33,
+        "fdistance": 1 
     },
     "scene":{
         "background":{

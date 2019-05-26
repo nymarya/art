@@ -39,7 +39,7 @@ class File
 typedef void (File::*file_methot_t)(size_t width, size_t height, const element_t * data);
 
 public:
-  File(){}
+  File():m_extension("ppm"){}
   File(std::string filename);
 
   ~File() = default;

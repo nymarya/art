@@ -5,6 +5,8 @@
 #include "../geometry/vector3.h"
 #include "../material/material.h"
 
+#include <math.h>
+
 namespace art
 {
     class Sphere : public Shape
@@ -28,7 +30,7 @@ namespace art
             float radius();
 
             /**
-             * @brief   check if a ray intersect a primitive
+             * @brief   check if a ray intersect a sphere
              * 
              * @param r        the ray
              * @param surface  the surface of primitive

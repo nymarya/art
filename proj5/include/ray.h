@@ -3,6 +3,8 @@
 
 #include "geometry/vector3.h"
 
+#include <limits>
+
 namespace art{
 
     typedef Vector3 Point3;
@@ -21,7 +23,7 @@ namespace art{
         /**
          * @brief Override operator () 
          */
-        Point3 operator()(component_t t);
+        Point3 at(component_t t) const;
 
         
         friend std::ostream& operator<< (std::ostream &os, const Ray &t){
@@ -62,11 +64,29 @@ namespace art{
 
         Vector3 d() const {return m_d;}
 
+        /**
+         * @brief Get tMin
+         * 
+         * @return float 
+         */
+        float tMin() const {return m_tMin;}
+
+        /**
+         * @brief Get tMax
+         * 
+         * @return float 
+         */
+        float tMax() const {return m_tMax;}
+
     private:
         Point3 m_o; //!< origin
         Vector3 m_d; //!< direction
 
         int m_x, m_y;
+
+        // Parameters used for surface equation
+        float m_tMin {0.0};
+        float m_tMax {std::numeric_limits<float>::max()};
 
     };
 

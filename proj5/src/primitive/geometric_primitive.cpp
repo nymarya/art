@@ -10,7 +10,12 @@ art::GeometricPrimitive::GeometricPrimitive(std::shared_ptr<Shape> shape,
  */
 bool art::GeometricPrimitive::intersect( const Ray& r, SurfaceInteraction *surface) const
 {
-    return m_shape->intersect(r, surface);
+    bool hit =  m_shape->intersect(r, surface);
+    if(!hit)
+        return false;
+
+    surface->primitive(this);
+    return true;
 }
 
 /**

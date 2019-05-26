@@ -4,7 +4,7 @@ art::Ray::Ray(const Point3& o, const Vector3& d )
 :m_o (o), m_d(d)
 {/*empty*/}
 
-art::Point3 art::Ray::operator() (component_t t) { 
+art::Point3 art::Ray::at(const component_t t) const { 
     return m_o + ( m_d * t); 
 } 
 

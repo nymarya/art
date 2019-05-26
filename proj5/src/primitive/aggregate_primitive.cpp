@@ -7,7 +7,6 @@
 art::AggregatePrimitive::AggregatePrimitive(std::vector<std::shared_ptr<Primitive>> primitives)
 :m_primitives(primitives), Primitive(*primitives.front().get())
 {
-    std::cout << "primitive13\n";
     /*empty*/
 }
 
