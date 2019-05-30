@@ -80,20 +80,12 @@ namespace art{
         float tMax() const {return m_tMax;}
 
         /**
-         * @brief 
+         * @brief Get x and y of the ray.
          * 
          * @param u 
          * @param v 
          */
-        std::tuple<float, float> uv() const
-        {
-            float phi = atan2(m_d.z(), m_d.x());
-            float theta = asin(m_d.y());
-            float u = 1-(phi + M_PI) / (2 * M_PI);
-            float v = (theta + M_PI/2) /M_PI;
-
-            return std::make_tuple(u, v);
-        }
+        std::tuple<float, float> uv() const;
 
     private:
         Point3 m_o; //!< origin

@@ -33,7 +33,6 @@ float art::Sphere::radius()
 bool art::Sphere::intersect(const art::Ray &r,
                art::SurfaceInteraction *surface) const
 {
-    std::cout << "isec1\n";
     // Equation from "Line-sphere intersection" article
     // @see https://en.wikipedia.org/wiki/Line–sphere_intersection
 
@@ -51,7 +50,6 @@ bool art::Sphere::intersect(const art::Ray &r,
         float temp = (-b - std::sqrt(discriminant) ) ;
         if( temp < r.tMax() & (temp > r.tMin()))
         {
-            std::cout << "isec2\n";
             surface->time(temp);
             surface->p( r.at(temp) );
             surface->n( (surface->p() - m_center) / m_radius );
@@ -63,7 +61,6 @@ bool art::Sphere::intersect(const art::Ray &r,
         temp = (-b + std::sqrt(discriminant) );
         if( temp < r.tMax() & (temp > r.tMin()))
         {
-            std::cout << "isec3\n";
             surface->time(temp);
             surface->p( r.at(temp) );
             surface->n( (surface->p() - m_center) / m_radius );
@@ -73,7 +70,6 @@ bool art::Sphere::intersect(const art::Ray &r,
         }
 
     }
-    std::cout << "isec4\n";
     return false;
 }
 

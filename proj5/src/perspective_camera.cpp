@@ -29,7 +29,6 @@ art::Ray art::PerspectiveCamera::generate_ray(int x, int y)
     // Mapping Pixels to Screen Space
     auto u_scalar = l + (r - l)*(x * width() + 0.5)/width();
     auto v_scalar = b + (t - b)*(y * height() + 0.5)/height();
-    std::cout << "u: " << u_scalar << " v: " << v_scalar;
 
     auto direction = (-w * m_fdistance) + (u * u_scalar) + (v * v_scalar);
     auto origin = m_position ;
@@ -55,8 +54,6 @@ art::Ray art::PerspectiveCamera::generate_ray(float x, float y){
     // Mapping Pixels to Screen Space
     auto u_scalar = l + (r - l)*(x * width() + 0.5)/width();
     auto v_scalar = b + (t - b)*(y * height() + 0.5)/height();
-    std::cout << "x: " << x << " y: " << y << "\n";
-    std::cout << "u: " << u_scalar << " v: " << v_scalar <<"\n";
 
     auto direction = (-w * m_fdistance) + (u * u_scalar) + (v * v_scalar);
     auto origin = m_position ;

@@ -15,12 +15,10 @@ art::File::File(std::string filename)
 json art::File::read()
 {
 	// read a JSON file
-	std::cout << m_filename << "\n";
 	std::ifstream input(m_filename);
 	json j;
 	input >> j;
 
-	std::cout << "read1\n";
 	try
 	{
 		m_filename = j.at("filename");
@@ -63,17 +61,12 @@ std::shared_ptr<art::Buffer> art::File::create_canvas(json &j)
  */
 void art::File::save(size_t width, size_t height, const element_t *data)
 {
-	std::cout << "before save0\n";
 	file_methot_t save_method = funcMap[m_extension];
-	std::cout << "save0.5\n";
 	(this->*save_method)(width, height, data);
 }
 
 void art::File::save_ppm(size_t width, size_t height, const element_t *data)
 {
-
-	std::cout << "save1\n";
-
 	std::ofstream file;
 
 	std::string folder = "gallery/";
@@ -196,10 +189,8 @@ std::shared_ptr<art::Primitive> art::File::create_primitives(json &j)
 {
 
 	auto objects = j.at("scene").at("objects");
-	std::cout << "primitive1\n";
 
 	std::vector<std::shared_ptr<Primitive>> primitives;
-	std::cout << "primitive2\n";
 
 	// Create shapes
 	for (auto object : objects)
@@ -209,7 +200,6 @@ std::shared_ptr<art::Primitive> art::File::create_primitives(json &j)
 		std::string material_key = object.at("material");
 		
 		std::shared_ptr<Material> material = m_materials[material_key];
-		std::cout << "primitive6\n";
 
 		if (type == "sphere")
 		{
@@ -217,13 +207,10 @@ std::shared_ptr<art::Primitive> art::File::create_primitives(json &j)
 			auto v_center = object.at("center");
 			Vector3 center = Vector3(v_center.at("x"), v_center.at("y"),
 									 v_center.at("z"));
-			std::cout << "primitive7\n";
 			//Create shape and primitive
 			std::shared_ptr<Sphere> shape = std::make_shared<art::Sphere>(center, 
 											radius, name, material.get());
-			std::cout << "primitive8\n";
 			primitives.push_back(std::make_shared<art::GeometricPrimitive>(shape, material));
-			std::cout << "primitive9\n";
 		}
 		else
 		{
@@ -314,7 +301,8 @@ void art::File::load_materials(json &j)
 		if(type == "flat")
 		{
 			auto diffuse = material.at("diffuse");
-			auto r = diffuse.at("r"); auto g = diffuse.at("g");
+			auto r = diffuse.at("r"); 
+			auto g = diffuse.at("g");
 			auto b = diffuse.at("b");
 			m_materials[name] = std::make_shared<FlatMaterial>(r, g, b, name);
 		}

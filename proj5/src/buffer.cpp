@@ -61,7 +61,7 @@ void art::Buffer::pixel(const long x, const long y, const art::Vector3 &v)
 {
     if(x < 0u || (size_t)x >= m_width || y < 0u || (size_t)y >= m_height )
 		return;
-        
+          
     m_pixels[y * m_width + x  ] = v[RGB::RED] * 255;
     m_pixels[y * m_width + x + m_width * m_height ] = v[RGB::GREEN] * 255;
     m_pixels[y * m_width + x + m_width * m_height * 2] = v[RGB::BLUE] * 255;
