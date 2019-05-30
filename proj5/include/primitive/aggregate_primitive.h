@@ -9,6 +9,9 @@ namespace art{
     /**
      * @brief Class that aggregates multiple primitives
      * in order to facilitate the processing.
+     * 
+     * This class will have two derivateives: PrimList (maintain a vector)
+     * and BVH (maintains a tree of primitives)
      */
     class AggregatePrimitive : public Primitive
     { 

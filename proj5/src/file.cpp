@@ -112,7 +112,7 @@ void art::File::save_png(const size_t width, const size_t height, const element_
 	std::string extension = ".png";
 	std::string path = folder + this->new_name() + extension;
 
-	//stbi_write_png(path.c_str, width, height, depth, data, stride);
+	//stbi_write_png(path.c_str, width, height, depth, data, 2);
 }
 
 /**
@@ -205,11 +205,8 @@ std::shared_ptr<art::Primitive> art::File::create_primitives(json &j)
 	for (auto object : objects)
 	{
 		std::string type = object.at("type");
-		std::cout << "primitive3\n";
 		std::string name = object.at("name");
-		std::cout << "primitive4\n";
 		std::string material_key = object.at("material");
-		std::cout << "primitive5\n";
 		
 		std::shared_ptr<Material> material = m_materials[material_key];
 		std::cout << "primitive6\n";
@@ -235,7 +232,6 @@ std::shared_ptr<art::Primitive> art::File::create_primitives(json &j)
 	}
 
 	auto aa = std::make_shared<AggregatePrimitive>(primitives);
-	std::cout << "primitive10\n";
 	return aa;
 }
 

@@ -14,20 +14,20 @@ namespace art{
         ~SampleIntegrator() = default;
         SampleIntegrator( std::shared_ptr< Camera> cam,
                           std::shared_ptr<Sampler> sampler)
-            : camera{cam}, sampler{sampler}{};
+            : m_camera{cam}, m_sampler{sampler}{};
 
         virtual Vector3 Li( const Ray& ray, const Scene& scene,
                 const Sampler& sampler ) const = 0;
         /**
          * The main loop that traverse the pixels and
          * creates an image. */
-        void render( const Scene& scene );
+        void render( const Scene& scene ) override;
         void preprocess( const Scene& scene ){}
 
     protected:
-        std::shared_ptr< Camera> camera;
+        std::shared_ptr< Camera> m_camera;
     private:
-        std::shared_ptr<Sampler> sampler;
+        std::shared_ptr<Sampler> m_sampler;
 };
 }
 
