@@ -1,0 +1,107 @@
+{
+    "camera":{
+        "width": 900,
+        "height": 450,
+        "type": "perspective",
+        "position":  [7, 2, 5], 
+        "target": [0,0,-1], 
+        "up": [0,1,0],
+        "fovy": 30.0,
+        "aspect": 1.33,
+        "fdistance": 1 
+    },
+    "scene":{
+        "background":{
+            "type": "gradient",
+            "colors":[
+                [153, 204, 255],
+                [18, 10, 143],
+                [18, 10, 143],
+                [153,204,255]
+            ]
+        },
+        "objects":[ 
+            { "type": "sphere", 
+                "name":"sphere1", "material":"greenish",
+                "radius":0.5,
+                "center":{ "x":0, "y":0, "z":0}
+            },
+            { "type": "sphere", 
+                "name":"sphere2", "material":"redish",
+                "radius":0.5,
+                "center":{ "x":0.86, "y":0, "z":-1.5}
+            },
+            { "type": "sphere", 
+                "name":"sphere3", "material":"blueish",
+                "radius":0.5,
+                "center":{ "x":0.86, "y":0, "z":-1.5}
+            },
+            { "type": "sphere", 
+                "name":"sphere4", "material":"grey",
+                "radius":5000,
+                "center":{ "x":0, "y":-5000.5, "z":-1}
+            }
+        ],
+        "materials":[
+            { "type":"blinn", "name":"redish",
+                "ambient":{"r":0.1, "g":0.1, "b":0.1},
+                "diffuse":
+                    {
+                        "r":0.9, "g":0.2, "b":0.1
+                    },
+                "specular":{"r":0.8, "g":0.8, "b":0.8},
+                "glossiness": 64
+            },
+            {
+                "type":"blinn", "name":"greenish",
+                "ambient":{"r":0.1, "g":0.1, "b":0.1},
+                "diffuse":
+                    {
+                        "r":0.2, "g":0.9, "b":0.2
+                    },
+                "specular":{"r":0.8, "g":0.8, "b":0.8},
+                "glossiness":256
+            },
+            {
+                "type":"blinn", "name":"blueish",
+                "ambient":{"r":0.1, "g":0.1, "b":0.1},
+                "diffuse":
+                    {
+                        "r":0.1, "g":0.2, "b":0.9
+                    },
+                "specular":{"r":0.8, "g":0.8, "b":0.8},
+                "glossiness":20
+            },
+            {
+                "type":"blinn", "name":"grey",
+                "ambient":{"r":0.1, "g":0.1, "b":0.1},
+                "diffuse":
+                    {
+                        "r":0.8, "g":0.8, "b":0.8
+                    },
+                "specular":{"r":0, "g":0, "b":0},
+                "glossiness":8
+            }
+        ],
+        "lights":[
+            {
+                "type":"ambient", "name":"ambient_light",
+                "intensity":{"r":0.1, "g":0.1, "b":0.1}
+            },
+            {
+                "type":"point", "name":"point_light",
+                "intensity":{"r":0.7, "g":0.7, "b":0.7},
+                "position":{"x":0, "y":1.1, "z":-1}
+            }
+        ]
+    },
+    "filename":"teste_blinn",
+    "overwrite_file": false,
+    "running":{
+        "integrator": {
+            "type":"whitted",
+            "spp":1,
+            "depth": 1
+        }
+    }
+}

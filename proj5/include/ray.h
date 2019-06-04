@@ -32,34 +32,6 @@ namespace art{
             return os;
         }
 
-        /**
-         * @brief Get the x axis that generated the ray
-         * 
-         * @return component_t 
-         */
-        component_t x( void) const;
-
-        /**
-         * @brief Set the x axis that generated the ray
-         * 
-         * @return component_t 
-         */
-        void x(int x);
-
-        /**
-         * @brief Get the y axis that generated the ray
-         * 
-         * @return component_t 
-         */
-        component_t y(void) const;
-
-        /**
-         * @brief Set the y axis that generated the ray
-         * 
-         * @return component_t 
-         */
-        void y( int y );
-
         Point3 o() const 
         { return m_o;} 
 
@@ -90,8 +62,6 @@ namespace art{
     private:
         Point3 m_o; //!< origin
         Vector3 m_d; //!< direction
-
-        int m_x, m_y;
 
         // Parameters used for surface equation
         float m_tMin {0.0};

@@ -38,11 +38,7 @@ art::Ray art::OrthoCamera::generate_ray(int x, int y){
     auto direction = -w;
     auto origin = e + u*u_scalar + v * v_scalar;
 
-    Ray * ray = new Ray(origin, direction);
-    ray->x(x);
-    ray->y(y);
-
-    return *ray;
+    return Ray(origin, direction);
 }
 
 /**
