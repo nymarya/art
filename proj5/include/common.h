@@ -4,6 +4,7 @@
 #include <iostream>
 
 using component_t = float;
+using real_t = float;
 typedef long coord_type;
 
 /// Enum for easily access the coordinates positions.
