@@ -12,35 +12,35 @@ art::Vector3 ka();
  * 
  * @param ka 
  */
-void ka(Vector3 ka);
+void ka(art::Vector3 ka);
 
 /**
  * @brief Get the diffuse coefficient
  * 
  * @return Vector3 
  */
-Vector3 kd();
+art::Vector3 kd();
 
 /**
  * @brief Set the diffuse coefficient.
  * 
  * @param kd 
  */
-void kd(Vector3 kd);
+void kd(art::Vector3 kd);
 
 /**
  * @brief Get the specular coefficient.
  * 
  * @return Vector3 
  */
-Vector3 s();
+art::Vector3 s();
 
 /**
  * @brief Set the specular coefficient.
  * 
  * @param s 
  */
-void s(Vector3 s);
+void s(art::Vector3 s);
 
 /**
  * @brief Get glossiness exponent.

@@ -32,13 +32,14 @@ namespace art{
 
             ~DepthMapIntegrator() = default;
 
-
-            void preprocess( const Scene& scene, Sampler& sampler );
+            void preprocess( const Scene& scene, Sampler& sampler ) override;
             Vector3 Li( const Ray& ray, const Scene& scene, const Sampler& sampler ) const;
 
         private:
-            float m_tMin {0.0};
-            float m_tMax {std::numeric_limits<float>::max()};
+            // tMin and tMax are initialized in a way that the 
+            // 'preprocess' step will adjust both.
+            float m_tMin {std::numeric_limits<float>::max()};
+            float m_tMax {std::numeric_limits<float>::min()};
 
             Vector3 m_far_color, m_near_color;
             bool m_fixed_t {false}; // parameter that defines if the tMin and tMax will be passed to the class

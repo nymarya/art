@@ -20,6 +20,8 @@ namespace art{
             ~FlatIntegrator() = default;
 
             Vector3 Li( const Ray& ray, const Scene& scene, const Sampler& sampler ) const;
+            void preprocess( const Scene& scene, Sampler& sampler )  override{
+            }
 
     };
     
