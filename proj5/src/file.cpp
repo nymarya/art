@@ -198,7 +198,7 @@ std::shared_ptr<art::Primitive> art::File::create_primitives(json &j)
 		std::string type = object.at("type");
 		std::string name = object.at("name");
 		std::string material_key = object.at("material");
-		
+
 		std::shared_ptr<Material> material = m_materials[material_key];
 
 		if (type == "sphere")
@@ -208,8 +208,8 @@ std::shared_ptr<art::Primitive> art::File::create_primitives(json &j)
 			Vector3 center = Vector3(v_center.at("x"), v_center.at("y"),
 									 v_center.at("z"));
 			//Create shape and primitive
-			std::shared_ptr<Sphere> shape = std::make_shared<art::Sphere>(center, 
-											radius, name, material.get());
+			std::shared_ptr<Sphere> shape = std::make_shared<art::Sphere>(center,
+																		  radius, name, material.get());
 			primitives.push_back(std::make_shared<art::GeometricPrimitive>(shape, material));
 		}
 		else
@@ -225,16 +225,26 @@ std::shared_ptr<art::Primitive> art::File::create_primitives(json &j)
 /**
  * @brief Create a integrator object
  */
-std::unique_ptr<art::Integrator> art::File::create_integrator(json &j, std::shared_ptr<Camera> camera, 
-														std::shared_ptr<art::Sampler> sampler)
+std::unique_ptr<art::Integrator> art::File::create_integrator(json &j, std::shared_ptr<Camera> camera,
+															  std::shared_ptr<art::Sampler> sampler)
 {
 	auto integrator = j.at("running").at("integrator");
 	std::string type = integrator.at("type");
 	if (type == "flat")
 	{
-	     return std::make_unique<FlatIntegrator>(camera, sampler);
-    }
-	else 
+		return std::make_unique<FlatIntegrator>(camera, sampler);
+	}
+	else if (type == "depth_map")
+	{
+		auto fc = integrator.at("far_color");
+		Vector3 far_color = Vector3( fc.at("r"), fc.at("g"), fc.at("b") );
+
+		auto nc = integrator.at("near_color");
+		Vector3 near_color = Vector3( nc.at("r"), nc.at("g"), nc.at("b") );
+
+		return std::make_unique<DepthMapIntegrator>(camera, sampler, far_color, near_color);
+	}
+	else
 	{
 		throw std::invalid_argument("Invalid syntax. Type not found: " + type);
 	}
@@ -293,20 +303,20 @@ std::shared_ptr<art::Material> art::File::material(std::string name)
 void art::File::load_materials(json &j)
 {
 	auto materials = j.at("scene").at("materials");
-	for( auto material : materials)
+	for (auto material : materials)
 	{
 		std::string type = material.at("type");
 		std::string name = material.at("name");
 
-		if(type == "flat")
+		if (type == "flat")
 		{
 			auto diffuse = material.at("diffuse");
-			auto r = diffuse.at("r"); 
+			auto r = diffuse.at("r");
 			auto g = diffuse.at("g");
 			auto b = diffuse.at("b");
 			m_materials[name] = std::make_shared<FlatMaterial>(r, g, b, name);
 		}
-		else 
+		else
 		{
 			throw std::invalid_argument("Invalid syntax. Type not found: " + type);
 		}

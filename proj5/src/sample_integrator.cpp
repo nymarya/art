@@ -4,8 +4,8 @@
 void art::SampleIntegrator::render(const Scene& scene) {
     // Always call the preprocess() before doing any rendering.
     // This might be just an empty method, or not, depending on the integrator's needs.
-    preprocess(scene);
-    
+    preprocess(scene, *m_sampler.get());
+    std::cout << "aa\n";
     // This might just be a tile (part) of an image, rendered in parallel.
     auto h = m_camera->film()->height();
     auto w = m_camera->film()->width();

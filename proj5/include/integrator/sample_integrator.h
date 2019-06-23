@@ -22,7 +22,7 @@ namespace art{
          * The main loop that traverse the pixels and
          * creates an image. */
         void render( const Scene& scene ) override;
-        void preprocess( const Scene& scene ){}
+        void preprocess( const Scene& scene, Sampler& sampler ){}
 
     protected:
         std::shared_ptr< Camera> m_camera;
