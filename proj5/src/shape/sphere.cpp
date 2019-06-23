@@ -1,7 +1,8 @@
 #include "../../include/shape/sphere.h"
+#include <math.h>
 
 art::Sphere::Sphere(art::Vector3 center, float radius, std::string name, art::Material *material)
-    : m_center(center), m_radius(radius), Shape(name, material)
+    : Shape(name, material), m_center(center), m_radius(radius)
 {
 }
 
@@ -40,15 +41,14 @@ bool art::Sphere::intersect(const art::Ray &r,
 
     Vector3 d = r.d();
 
-    float a = d * d;
     float b = oc * d;
     float c = (oc * oc) - (m_radius * m_radius);
 
     float discriminant = b*b - c ;
     if(discriminant > 0)
     {
-        float temp = (-b - std::sqrt(discriminant) ) ;
-        if( temp < r.tMax() & (temp > r.tMin()))
+        float temp = (-b - sqrt(discriminant) ) ;
+        if(( temp < r.tMax()) & (temp > r.tMin()))
         {
             surface->time(temp);
             surface->p( r.at(temp) );
@@ -58,8 +58,8 @@ bool art::Sphere::intersect(const art::Ray &r,
             return true;
         }
 
-        temp = (-b + std::sqrt(discriminant) );
-        if( temp < r.tMax() & (temp > r.tMin()))
+        temp = (-b + sqrt(discriminant) );
+        if( (temp < r.tMax()) & (temp > r.tMin()))
         {
             surface->time(temp);
             surface->p( r.at(temp) );

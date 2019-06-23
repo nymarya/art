@@ -7,7 +7,7 @@ Another Ray Tracer
 |  Command           | Description  |
 | :-----| :-------------|
 | ```$ make``` | Compile |
-| ```$ ./canvas.out``` | Run | 
+| ```$ ./canvas.out <path_to_scene_file>.json``` | Run | 
 
 
 ## Usage
@@ -110,4 +110,9 @@ The `type` argument is `gradient` and the `colors` expects 4 lists with the valu
 }
 ```
 
+### Integrators
+
+#### FlatIntegrator
+
+##### Material
 
