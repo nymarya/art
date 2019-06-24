@@ -1,0 +1,76 @@
+{
+    "camera":{
+        "width": 800,
+        "height": 600,
+        "type": "perspective",
+        "position":  [0, 0, 2], 
+        "target": [0,0,-10], 
+        "up": [0,1,1],
+        "fovy": 65.0,
+        "aspect": 1.33,
+        "fdistance": 1 
+    },
+    "scene":{
+        "background":{
+            "type": "gradient",
+            "colors":[
+                [153, 204, 255],
+                [18, 10, 143],
+                [18, 10, 143],
+                [153,204,255]
+            ]
+        },
+        "objects":[ 
+            { "type": "sphere", 
+                "name":"sphere1", "material":"green",
+                "radius":0.4,
+                "center":{ "x":-1.0, "y":0.5, "z":-5}
+            },
+            { "type": "sphere", 
+                "name":"sphere2", "material":"green",
+                "radius":0.4,
+                "center":{ "x":1.0, "y":-0.5, "z":-8}
+            },
+            { "type": "sphere", 
+                "name":"sphere3", "material":"gold",
+                "radius":0.4,
+                "center":{ "x":-1.0, "y":-1.5, "z":-3.5}
+            },
+            { "type": "sphere", 
+                "name":"sphere4", "material":"pink",
+                "radius":1,
+                "center":{ "x":7.0, "y":1.5, "z":-10}
+            }
+        ],
+        "materials":[
+            { "type":"flat", "name":"gold",
+                "diffuse":
+                    {
+                        "r":236, "g":124, "b":17
+                    }
+            },
+            {
+                "type":"flat", "name":"green",
+                "diffuse":
+                    {
+                        "r":42, "g":201, "b":51
+                    }
+            },
+            {
+                "type":"flat", "name":"pink",
+                "diffuse":
+                    {
+                        "r":253, "g":153, "b":253
+                    }
+            }
+        ] 
+    },
+    "filename":"teste_normal",
+    "overwrite_file": false,
+    "running":{
+        "integrator": {
+            "type":"normal",
+            "spp":1
+        }
+    }
+}

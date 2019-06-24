@@ -33,8 +33,7 @@ art::Vector3 art::DepthMapIntegrator::Li(const Ray &ray, const Scene &scene,
     SurfaceInteraction isect;
     if (!scene.intersect(ray, &isect))
     {
-        // If no object is found, get pixel from background
-        // Color for a far point
+        // If no object is found, get pixel from a far point
         auto r = m_far_color[0] / 255.0;
         auto g = m_far_color[1] / 255.0;
         auto b = m_far_color[2] / 255.0;

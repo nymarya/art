@@ -244,6 +244,10 @@ std::unique_ptr<art::Integrator> art::File::create_integrator(json &j, std::shar
 
 		return std::make_unique<DepthMapIntegrator>(camera, sampler, far_color, near_color);
 	}
+	else if (type == "normal")
+	{
+		return std::make_unique<NormalMapIntegrator>(camera, sampler);
+	}
 	else
 	{
 		throw std::invalid_argument("Invalid syntax. Type not found: " + type);

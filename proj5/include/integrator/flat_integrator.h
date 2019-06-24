@@ -14,7 +14,8 @@ namespace art{
     private:
         /* data */
         public:
-            FlatIntegrator(std::shared_ptr<Camera> camera, std::shared_ptr<art::Sampler> sampler)
+            FlatIntegrator(std::shared_ptr<Camera> camera, 
+                std::shared_ptr<art::Sampler> sampler)
             :SampleIntegrator(camera, sampler){}
 
             ~FlatIntegrator() = default;
