@@ -2,7 +2,7 @@
 #define _deptsh_int_h_
 
 #include "sample_integrator.h"
-#include "../common.h";
+#include "../common.h"
 
 #include <cmath>
 

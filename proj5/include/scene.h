@@ -37,6 +37,8 @@ namespace art{
             {
                 return m_aggregate->intersect_p(r);
             }
+
+            void stub() const{}
     };
 }
 

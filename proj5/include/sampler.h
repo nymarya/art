@@ -10,6 +10,8 @@ namespace art
         public:
             Sampler(/* args */){};
             ~Sampler() = default;
+
+            void stub() const{}
     };
 
 } // namespace art

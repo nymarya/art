@@ -28,5 +28,6 @@ art::Vector3 art::FlatIntegrator::Li(const Ray& ray, const Scene& scene, const S
         // Assign diffuse color to L.
         L = fm->diffuse(); // Call a method present only in FlatMaterial.
     }
+    sampler.stub();
     return L;
 }

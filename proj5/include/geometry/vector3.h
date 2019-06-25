@@ -13,7 +13,7 @@ namespace art{
     class Vector3
     {
         public:
-            Vector3():m_components( {0,0,0} ){}
+            Vector3():m_components{0,0,0} {}
             Vector3(component_t component_t1, component_t component_t2, component_t component_t3);
             ~Vector3() = default;
             

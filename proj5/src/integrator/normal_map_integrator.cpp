@@ -30,5 +30,6 @@ art::Vector3 art::NormalMapIntegrator::Li(const Ray &ray, const Scene &scene,
 
         return Vector3{r, g, b};
     }
+    sampler.stub();
     return L;
 }

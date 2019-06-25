@@ -9,8 +9,8 @@ void art::SampleIntegrator::render(const Scene& scene) {
     // This might just be a tile (part) of an image, rendered in parallel.
     auto h = m_camera->film()->height();
     auto w = m_camera->film()->width();
-    for ( int y = 0 ; y < h ; y++ ) {
-        for( int x = 0 ; x < w ; x++ ) {
+    for ( auto y = 0u ; y < h ; y++ ) {
+        for( auto x = 0u ; x < w ; x++ ) {
             float _x = x/ (float)w;
             float _y = y/ (float)h;
             Ray ray = m_camera->generate_ray( _x , _y ); // Generate the ray from (x,y)
