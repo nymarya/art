@@ -4,11 +4,25 @@
 #include "sample_integrator.h"
 
 namespace art{
+    /**
+     * @brief This class implements a integrator for the 
+     * Blinn-Phong reflection model, which aims to increase 
+     * the scene realism.
+     */
     class BlinnPhongIntegrator : public SampleIntegrator
     {
         public:
-            BlinnPhongIntegrator(/* args */);
-            ~BlinnPhongIntegrator();
+            BlinnPhongIntegrator(std::shared_ptr<Camera> camera, 
+                                std::shared_ptr<art::Sampler> sampler)
+                                :SampleIntegrator(camera, sampler){}
+            ~BlinnPhongIntegrator() = default;
+
+            Vector3 Li( const Ray& ray, const Scene& scene, const Sampler& sampler ) const;
+            void preprocess( const Scene& scene, Sampler& sampler )  override{
+                //stub
+                scene.stub();
+                sampler.stub();
+            }
         private:
             /* data */
     };

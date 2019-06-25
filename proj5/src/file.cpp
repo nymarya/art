@@ -347,3 +347,48 @@ void art::File::load_materials(json &j)
 		}
 	}
 }
+
+/**
+ * @brief Load lights defined at the scene file.
+ */
+std::vector<std::shared_ptr<art::Light>> art::File::load_lights(json &j)
+{
+	auto lights = j.at("scene").at("lights");
+	std::vector<std::shared_ptr<art::Light>> result;
+	for (auto light : lights)
+	{
+		std::string type = light.at("type");
+		std::string name = light.at("name");
+
+		if (type == "ambient")
+		{
+			auto intensity = light.at("intensity");
+			component_t r = intensity.at("r");
+			component_t g = intensity.at("g");
+			component_t b = intensity.at("b");
+
+			Vector3 rgb{r, g, b};
+			m_lights[name] = std::make_shared<AmbientLight>(rgb, name);
+		}
+		if (type == "point")
+		{
+			auto intensity = light.at("intensity");
+			component_t r = intensity.at("r");
+			component_t g = intensity.at("g");
+			component_t b = intensity.at("b");
+			Vector3 rgb{r, g, b};
+
+			auto position = light.at("position");
+			component_t x = intensity.at("x");
+			component_t y = intensity.at("y");
+			component_t z = intensity.at("z");
+			Vector3 xyz{x, y, z};
+
+			m_lights[name] = std::make_shared<PointLight>(rgb, name, xyz);
+		}
+		else
+		{
+			throw std::invalid_argument("Invalid syntax. Type not found: " + type);
+		}
+	}
+}

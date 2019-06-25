@@ -16,6 +16,8 @@
 #include "../integrator/flat_integrator.h"
 #include "../integrator/depth_map_integrator.h"
 #include "../integrator/normal_map_integrator.h"
+#include "../light/ambient_light.h"
+#include "../light/point_light.h"
 #include "../material/flat_material.h"
 #include "../primitive/aggregate_primitive.h"
 #include "../primitive/geometric_primitive.h"
@@ -79,6 +81,14 @@ public:
   std::unique_ptr<Integrator> create_integrator(json &j, std::shared_ptr<Camera> camera, std::shared_ptr<Sampler> sampler);
 
   /**
+   * @brief Load lights defined at the scene file.
+   * 
+   * @param j 
+   * @return std::vector<std::shared_ptr<Light>> 
+   */
+  std::vector<std::shared_ptr<Light>> load_lights(json &j);
+
+  /**
    * @brief Save image to file
    */
   void save(size_t width, size_t height, const element_t * data);
@@ -133,6 +143,9 @@ private:
 
   //Map of materials
   std::map<std::string, std::shared_ptr<Material>> m_materials;
+
+  //Map of lights
+  std::map<std::string, std::shared_ptr<Light>> m_lights;
 
 };
 } // namespace rstzr

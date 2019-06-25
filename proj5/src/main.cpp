@@ -43,10 +43,12 @@ void init_engine(std::string filename)
      std::shared_ptr<Sampler> sampler(new Sampler());
 
      g_integrator = file->create_integrator(j, g_camera, sampler);
+
+     // Retrieve the lights
+     std::vector<std::shared_ptr<Light>> lights = file->load_lights(j);
      // We create the scene last, because we need all the other objects first.
      // create a scene
-
-     Scene scene = Scene(agg, background);
+     Scene scene = Scene(agg, background, lights);
      g_scene = std::make_unique<Scene>(scene);
 }
 
