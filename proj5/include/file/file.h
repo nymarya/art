@@ -25,7 +25,6 @@
 #include "../common.h"
 
 #include "json.hpp"
-#include "stb_image_write.h"
 
 using json = nlohmann::json;
 
@@ -41,7 +40,7 @@ class File
 typedef void (File::*file_methot_t)(size_t width, size_t height, const element_t * data);
 
 public:
-  File():m_extension("ppm"){}
+  File():m_extension("png"){}
   File(std::string filename);
 
   ~File() = default;

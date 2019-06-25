@@ -4,7 +4,7 @@
 
 art::File::File(std::string filename)
 	: m_filename(filename),
-	  m_extension("ppm"),
+	  m_extension("png"),
 	  m_overwrite(false)
 {
 	/*empty*/
@@ -105,7 +105,28 @@ void art::File::save_png(const size_t width, const size_t height, const element_
 	std::string extension = ".png";
 	std::string path = folder + this->new_name() + extension;
 
-	//stbi_write_png(path.c_str, width, height, depth, data, 2);
+    std::ofstream file;
+	file.open (path);
+  	file << "P3\n";
+	file << width << " "
+		 << height << "\n";
+	file << 255 << "\n";
+
+	for (int y = height - 1; y >= 0; y--)
+	{
+		for (size_t x = 0; x < width; x++)
+		{
+			for (size_t z = 0u; z < 3u; z++)
+			{
+				//y * width + x + width * height * 2
+				auto index = y * width + x + width * height * z;
+				file << static_cast<unsigned>(data[index]) << " ";
+			}
+		}
+		file << "\n";
+	}
+
+	file.close();
 }
 
 /**
@@ -218,8 +239,8 @@ std::shared_ptr<art::Primitive> art::File::create_primitives(json &j)
 		}
 	}
 
-	auto aa = std::make_shared<AggregatePrimitive>(primitives);
-	return aa;
+	auto agg = std::make_shared<AggregatePrimitive>(primitives);
+	return agg;
 }
 
 /**
