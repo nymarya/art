@@ -13,7 +13,7 @@ namespace art{
     {
         public:
             AmbientLight( Vector3 intensity, std::string name)
-                : Light(intensity, name) {}
+                : Light(intensity, name, true) {}
             ~AmbientLight() = default;
         private:
             /*data */

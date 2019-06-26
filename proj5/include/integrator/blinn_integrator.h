@@ -2,6 +2,7 @@
 #define _blinn_integrator_h_
 
 #include "sample_integrator.h"
+#include "../material/blinn_material.h"
 
 namespace art{
     /**
