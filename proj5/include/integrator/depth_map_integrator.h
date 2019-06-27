@@ -1,5 +1,5 @@
 #ifndef _depth_int_h_
-#define _deptsh_int_h_
+#define _depth_int_h_
 
 #include "sample_integrator.h"
 #include "../common.h"

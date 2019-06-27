@@ -18,7 +18,7 @@ namespace art{
                                 :SampleIntegrator(camera, sampler){}
             ~BlinnPhongIntegrator() = default;
 
-            Vector3 Li( const Ray& ray, const Scene& scene, const Sampler& sampler ) const;
+            Vector3 Li( const Ray& ray, const Scene& scene, const Sampler& sampler ) const override;
             void preprocess( const Scene& scene, Sampler& sampler )  override{
                 //stub
                 scene.stub();

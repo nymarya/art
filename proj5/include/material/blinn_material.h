@@ -1,5 +1,5 @@
 #ifndef _blinn_material_h_
-#define _blinn_metrial_h_
+#define _blinn_material_h_
 
 #include "../common.h"
 #include "material.h"
@@ -65,7 +65,6 @@ namespace art{
 
             /**
              * @brief Set glossiness exponent
-             * 
              */
             void g( real_t g );
 
