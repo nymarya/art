@@ -25,6 +25,8 @@ namespace art{
              * @return false 
              */
             bool is_ambient() {return m_ambient; }
+
+            Vector3 intensity() {return m_intensity; }
         private:
             Vector3 m_intensity; // The intensity of the light (RGB)
             std::string m_name;

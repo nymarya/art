@@ -17,12 +17,22 @@ art::Vector3 art::BlinnPhongIntegrator::Li( const Ray& ray,
     else {
         // Compute n
         auto n = isect.n();
-        
+
         //Evaluate shading model and set pixel to that color.
         BlinnMaterial *fm = dynamic_cast< BlinnMaterial *>( isect.primitive()->get_material() );
 
-        // Assign diffuse color to L.
-        L = fm->kd(); // Call a method present only in FlatMaterial.
+        for (auto light : scene.lights()) 
+        {
+            if (light->is_ambient())
+            {
+                L += light->intensity();
+            }
+            auto I = light->intensity();
+
+        }
+        // Use lambertian shading model to
+        // 
+        L = fm->kd();
     }
     sampler.stub();
     return L;

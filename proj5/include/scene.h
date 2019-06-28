@@ -44,7 +44,7 @@ namespace art{
              * 
              * @return std::vector<std::shared_ptr<Light>> 
              */
-            std::vector<std::shared_ptr<Light>> lights() {return m_lights; }
+            std::vector<std::shared_ptr<Light>> lights() const {return m_lights; }
 
             void stub() const{}
     };
