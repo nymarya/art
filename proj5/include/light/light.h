@@ -27,6 +27,8 @@ namespace art{
             bool is_ambient() {return m_ambient; }
 
             Vector3 intensity() {return m_intensity; }
+
+            Vector3 Li( const SurfaceInteraction &isect, Vector3 *wi, VisibilityTester *vt);
         private:
             Vector3 m_intensity; // The intensity of the light (RGB)
             std::string m_name;

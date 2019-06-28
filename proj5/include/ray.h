@@ -51,6 +51,13 @@ namespace art{
          */
         float tMax() const {return m_tMax;}
 
+         /**
+         * @brief Set tMax
+         * 
+         * @return float 
+         */
+        void tMax(float tMax) {m_tMax = tMax;}
+
         /**
          * @brief Get x and y of the ray.
          * 

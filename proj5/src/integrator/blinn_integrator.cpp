@@ -15,6 +15,9 @@ art::Vector3 art::BlinnPhongIntegrator::Li( const Ray& ray,
         L = scene.m_background->color(u, v);
     }
     else {
+        Vector3 wi;
+        VisibilityTester vt;
+        
         // Compute n
         auto n = isect.n();
 
@@ -26,8 +29,21 @@ art::Vector3 art::BlinnPhongIntegrator::Li( const Ray& ray,
             if (light->is_ambient())
             {
                 L += light->intensity();
+            } 
+            else 
+            {
+                auto Ii = light->Li(isect, &wi, &vt);
+                auto n = isect.n;
+
+                auto wo = isect.wo;
+                auto h = wo + wi;
+                h.make_unit_vector();
+
+                if (vt.unoccluded(scene)){
+                    L += fm->kd().cross(Ii).cross( fmax(0.0, n * wi) );
+                    L += fm->ks() * Ii * pow(fmax(0.0, dot(n, h)), gloss);
+                }
             }
-            auto I = light->intensity();
 
         }
         // Use lambertian shading model to

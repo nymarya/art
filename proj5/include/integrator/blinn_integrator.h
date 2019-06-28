@@ -3,6 +3,7 @@
 
 #include "sample_integrator.h"
 #include "../material/blinn_material.h"
+#include "../light/visibility_tester.h"
 
 namespace art{
     /**
