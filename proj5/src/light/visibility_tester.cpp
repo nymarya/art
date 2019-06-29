@@ -17,10 +17,11 @@ std::shared_ptr<art::Ray> art::VisibilityTester::raycaster() const
 {
     // Get the direction of the new ray
     // Destiny - origin
-    Vector3 v = m_isect_two.p() - m_isect_one.p();
+    Point3 origin = m_isect_one.p() + m_isect_one.n().normalize() * 0.001f;
+    Vector3 v = m_isect_two.p() - origin;
 
     // Create
-    std::shared_ptr<Ray> r (new Ray(m_isect_one.p(), v));
-    r->tMax(1);
+    std::shared_ptr<Ray> r (new Ray(origin, v));
+    r->tMax(1.0);
     return  r;
 }

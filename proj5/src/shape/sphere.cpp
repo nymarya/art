@@ -32,7 +32,7 @@ float art::Sphere::radius()
  * @brief   check if a ray intersect a sphere.
  */
 bool art::Sphere::intersect(const art::Ray &r,
-               art::SurfaceInteraction *surface) const
+                            art::SurfaceInteraction *surface) const
 {
     // Equation from "Line-sphere intersection" article
     // @see https://en.wikipedia.org/wiki/Line–sphere_intersection
@@ -44,31 +44,30 @@ bool art::Sphere::intersect(const art::Ray &r,
     float b = oc * d;
     float c = (oc * oc) - (m_radius * m_radius);
 
-    float discriminant = b*b - c ;
-    if(discriminant > 0)
+    float discriminant = b * b - c;
+    if (discriminant > 0)
     {
-        float temp = (-b - sqrt(discriminant) ) ;
-        if(( temp < r.tMax()) & (temp > r.tMin()))
+        float temp = (-b - sqrt(discriminant));
+        if ((temp < r.tMax()) & (temp > r.tMin()))
         {
             surface->time(temp);
-            surface->p( r.at(temp) );
-            surface->n( (surface->p() - m_center) / m_radius );
-            surface->wo( (d - r.o()) * -1.0f );
+            surface->p(r.at(temp));
+            surface->n((surface->p() - m_center) / m_radius);
+            surface->wo((d - r.o()) * -1.0f);
 
             return true;
         }
 
-        temp = (-b + sqrt(discriminant) );
-        if( (temp < r.tMax()) & (temp > r.tMin()))
+        temp = (-b + sqrt(discriminant));
+        if ((temp < r.tMax()) & (temp > r.tMin()))
         {
             surface->time(temp);
-            surface->p( r.at(temp) );
-            surface->n( (surface->p() - m_center) / m_radius );
-            surface->wo( (d - r.o()) * -1.0f );
+            surface->p(r.at(temp));
+            surface->n((surface->p() - m_center) / m_radius);
+            surface->wo((d - r.o()) * -1.0f);
 
             return true;
         }
-
     }
     return false;
 }
@@ -84,11 +83,24 @@ bool art::Sphere::intersect_p(const art::Ray &r) const
 
     Vector3 d = r.d();
 
-    float a = d * d;
     float b = oc * d;
     float c = (oc * oc) - (m_radius * m_radius);
 
-    float discriminant = b*b - a*c;
+    float discriminant = b * b - c;
 
-    return (discriminant >= 0.0);
+    if (discriminant >= 0)
+    {
+        float temp = (-b - sqrt(discriminant));
+        if ((temp < r.tMax()) & (temp > r.tMin()))
+        {
+            return true;
+        }
+
+        temp = (-b + sqrt(discriminant));
+        if ((temp < r.tMax()) & (temp > r.tMin()))
+        {
+            return true;
+        }
+    }
+    return false;
 }

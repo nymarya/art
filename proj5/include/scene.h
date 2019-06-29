@@ -12,6 +12,7 @@
 #include "surface_interaction.h"
 
 namespace art{
+    class Light; //Forward declaration
     class Scene {
         //=== Public data
         public:

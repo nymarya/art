@@ -7,6 +7,7 @@
 
 namespace art 
 {
+    class Scene; //Forward Declaration
     /**
      * @brief This auxiliary class testes wheter a shadow
      * ray suffered a occlusion.
@@ -15,7 +16,7 @@ namespace art
     {
     
         public:
-            VisibilityTester();
+            VisibilityTester() = default;
             VisibilityTester(const SurfaceInteraction &s1, const SurfaceInteraction &s2)
                 : m_isect_one{s1}, m_isect_two{ s2 } {}
 

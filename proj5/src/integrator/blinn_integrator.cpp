@@ -15,41 +15,48 @@ art::Vector3 art::BlinnPhongIntegrator::Li( const Ray& ray,
         L = scene.m_background->color(u, v);
     }
     else {
-        Vector3 wi;
-        VisibilityTester vt;
-        
-        // Compute n
-        auto n = isect.n();
+        // Variable that keeps the intensity
+        // of the ambient light
+        Vector3 ambient_contrib = Vector3(0.0, 0.0, 0.0);
 
         //Evaluate shading model and set pixel to that color.
         BlinnMaterial *fm = dynamic_cast< BlinnMaterial *>( isect.primitive()->get_material() );
 
         for (auto light : scene.lights()) 
         {
+            //sstd::cout << "lights\n";
             if (light->is_ambient())
             {
-                L += light->intensity();
+                // Compute  the surface’s ambient coefficient, or “ambient color,” and the
+                // ambient light intensity.
+                ambient_contrib = fm->ka().mult(light->intensity());
             } 
             else 
             {
-                auto Ii = light->Li(isect, &wi, &vt);
-                auto n = isect.n;
+                Vector3 wi;
+                VisibilityTester vt;
+                // Compute n
+                Vector3 n = isect.n();
 
-                auto wo = isect.wo;
-                auto h = wo + wi;
-                h.make_unit_vector();
+                // Evaluate shading model and set pixel to that color
+                auto i = light->Li(isect, &wi, &vt); //intensity
+                // Compute the equation equivalent v + l 
+                // in the Blinn-Phong model
+                auto h = isect.wo().normalize() + wi;
+                h /= h.normalize(); // Make unit vector
 
                 if (vt.unoccluded(scene)){
-                    L += fm->kd().cross(Ii).cross( fmax(0.0, n * wi) );
-                    L += fm->ks() * Ii * pow(fmax(0.0, dot(n, h)), gloss);
+                    // Use the Blinn-Phong model equation
+                    L += fm->kd().mult(i) * fmax(0.0, h * wi ) ;
+                    L += fm->s().mult(i) * pow(fmax(0.0, h * h ), fm->g());
                 }
             }
 
         }
-        // Use lambertian shading model to
-        // 
-        L = fm->kd();
+        
+        L = (L+ambient_contrib) * 255.0;
     }
     sampler.stub();
-    return L;
+    
+        return {fmin(255.0f, L.r()), fmin(255.0f, L.g()), fmin(255.0f, L.b())};
 }

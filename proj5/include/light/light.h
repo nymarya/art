@@ -2,9 +2,12 @@
 #define _light_h_
 
 #include "../geometry/vector3.h"
+#include "visibility_tester.h"
+#include "../surface_interaction.h"
 
 namespace art{
 
+    class VisibilityTester;
     /**
      * @brief Base class for any light used on a scene
      * 
@@ -28,7 +31,8 @@ namespace art{
 
             Vector3 intensity() {return m_intensity; }
 
-            Vector3 Li( const SurfaceInteraction &isect, Vector3 *wi, VisibilityTester *vt);
+            virtual Vector3 Li( const SurfaceInteraction &isect, Vector3 *wi, 
+                VisibilityTester *vt) = 0;
         private:
             Vector3 m_intensity; // The intensity of the light (RGB)
             std::string m_name;

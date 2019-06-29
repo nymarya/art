@@ -139,6 +139,8 @@ namespace art{
              */
             Vector3 normalize();
 
+            Vector3 mult( const Vector3&);
+
             friend std::ostream& operator<< (std::ostream &os, const Vector3 &t){
                 // std::string d1 = static_cast<component_t>(t.m_components[0]);
                 // std::string d2 = static_cast<component_t>(t.m_components[1]);

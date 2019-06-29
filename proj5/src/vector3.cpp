@@ -251,3 +251,10 @@ art::Vector3 art::Vector3::normalize()
     
     return art::Vector3(v1[0] / length,v1[1] / length, v1[2] /length);
 }
+
+
+art::Vector3 art::Vector3::mult(const Vector3&v2)
+{
+    return art::Vector3(m_components[0] * v2[0], m_components[1] *v2[1], 
+                        m_components[2] * v2[2]);
+}

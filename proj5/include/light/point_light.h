@@ -15,6 +15,17 @@ namespace art{
             PointLight( Vector3 intensity, std::string name, Vector3 position)
                 : Light(intensity, name), m_position(position) {}
             ~PointLight() = default;
+
+            /**
+             * @brief Calculates the contribution of the light
+             * 
+             * @param isect 
+             * @param wi 
+             * @param vt 
+             * @return Vector3 
+             */
+            Vector3 Li( const SurfaceInteraction &isect, Vector3 *wi, 
+                                VisibilityTester *vt) override;
         private:
             Vector3 m_position; // The position of the light (x y z)
     };

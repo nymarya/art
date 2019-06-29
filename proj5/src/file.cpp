@@ -269,6 +269,10 @@ std::unique_ptr<art::Integrator> art::File::create_integrator(json &j, std::shar
 	{
 		return std::make_unique<NormalMapIntegrator>(camera, sampler);
 	}
+	else if (type == "whitted")
+	{
+		return std::make_unique<BlinnPhongIntegrator>(camera, sampler);
+	}
 	else
 	{
 		throw std::invalid_argument("Invalid syntax. Type not found: " + type);
@@ -340,6 +344,28 @@ void art::File::load_materials(json &j)
 			auto g = diffuse.at("g");
 			auto b = diffuse.at("b");
 			m_materials[name] = std::make_shared<FlatMaterial>(r, g, b, name);
+		} else if (type == "blinn"){
+			auto ambient = material.at("ambient");
+			component_t r = ambient.at("r");
+			component_t g = ambient.at("g");
+			component_t b = ambient.at("b");
+			Vector3 v_ambient(r,g ,b);
+
+			auto diffuse = material.at("diffuse");
+			r = diffuse.at("r");
+			g = diffuse.at("g");
+			b = diffuse.at("b");
+			Vector3 v_diffuse(r, g, b);
+
+			auto specular = material.at("specular");
+			r = specular.at("r");
+			g = specular.at("g");
+			b = specular.at("b");
+			Vector3 v_specular(r, g, b);
+
+			float gloss = material.at("glossiness");
+			m_materials[name] = std::make_shared<BlinnMaterial>(v_ambient, v_diffuse, 
+																v_specular, gloss, name);
 		}
 		else
 		{
@@ -369,8 +395,9 @@ std::vector<std::shared_ptr<art::Light>> art::File::load_lights(json &j)
 
 			Vector3 rgb{r, g, b};
 			m_lights[name] = std::make_shared<AmbientLight>(rgb, name);
+			result.push_back(m_lights[name]);
 		}
-		if (type == "point")
+		else if (type == "point")
 		{
 			auto intensity = light.at("intensity");
 			component_t r = intensity.at("r");
@@ -379,16 +406,19 @@ std::vector<std::shared_ptr<art::Light>> art::File::load_lights(json &j)
 			Vector3 rgb{r, g, b};
 
 			auto position = light.at("position");
-			component_t x = intensity.at("x");
-			component_t y = intensity.at("y");
-			component_t z = intensity.at("z");
+			component_t x = position.at("x");
+			component_t y = position.at("y");
+			component_t z = position.at("z");
 			Vector3 xyz{x, y, z};
 
 			m_lights[name] = std::make_shared<PointLight>(rgb, name, xyz);
+			result.push_back(m_lights[name]);
 		}
 		else
 		{
 			throw std::invalid_argument("Invalid syntax. Type not found: " + type);
 		}
 	}
+
+	return result;
 }
